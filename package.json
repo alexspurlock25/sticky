@@ -19,9 +19,7 @@
   "homepage": "https://github.com/alexspurlock25/sticky#readme",
   "devDependencies": {
     "electron": "^9.1.1",
-    "electron-rebuild": "^1.11.0"
-  },
-  "dependencies": {
-    "sqlite": "^4.0.12"
+    "electron-rebuild": "^1.11.0",
+    "sqlite3": "^5.0.0"
   }
 }

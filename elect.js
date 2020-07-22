@@ -4,8 +4,8 @@ function createWindow () {
     // create the browser window
     const win = new BrowserWindow({
 
-        width: 600,
-        height: 500,
+        width: 900,
+        height: 600,
         webPreferences: {
             nodeIntegration: true
         }
@@ -15,7 +15,7 @@ function createWindow () {
     win.loadFile("index.html")
 
     // open dev tools
-    // win.webContents.openDevTools()
+    win.webContents.openDevTools()
 
 }
 
