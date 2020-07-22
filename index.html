@@ -5,13 +5,22 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
-    <script src="db/db_init.js"></script>
     <link rel="stylesheet" href="css_files/main.css">
     <title>Sticky</title>
 </head>
 <body>
-<!-- insert url, username, password -->
-<form id="user-input-form" method="POST" onsubmit="insertData()">
+<div id="add-button-container"><button id="add-button" onclick="addButton()">+</button></div>
+
+<table id="user-data-table" style="width:100%">
+    <tr>
+    <tr>
+        <th>URL</th>
+        <th>Username</th>
+        <th>Password</th>
+    </tr>
+</table>
+
+<form id="user-input-form" method="POST" onsubmit="insertData()" style="display: none;">
 
     <input placeholder="URL" id="textbox-url" type="text" required>
     <input placeholder="Username" id="textbox-username" type="text" required>
@@ -21,27 +30,6 @@
 
 </form>
 
-<table id="user-data-table" style="width:100%">
-    <thead>
-    <tr>
-        <th>URL</th>
-        <th>Username</th>
-        <th>Password</th>
-        </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td>Jill</td>
-      <td>Smith</td>
-      <td>50</td>
-    </tr>
-    <tr>
-      <td>Eve</td>
-      <td>Jackson</td>
-      <td>94</td>
-    </tr>
-</tbody>
-  </table> 
-
+<script src="db/db_init.js"></script>
 </body>
 </html>
