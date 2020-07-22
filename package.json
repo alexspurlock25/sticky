@@ -1,0 +1,27 @@
+{
+  "name": "sticky",
+  "version": "1.0.0",
+  "description": "A basic, minimalistic, offline, account manager. Stores and sorts username, emails, and passwords.  https://github.com/alexspurlock25/sticky.git",
+  "main": "elect.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexspurlock25/sticky.git"
+  },
+  "author": "Alexander Spurlock",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexspurlock25/sticky/issues"
+  },
+  "homepage": "https://github.com/alexspurlock25/sticky#readme",
+  "devDependencies": {
+    "electron": "^9.1.1",
+    "electron-rebuild": "^1.11.0"
+  },
+  "dependencies": {
+    "sqlite": "^4.0.12"
+  }
+}

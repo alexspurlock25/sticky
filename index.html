@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Sticky</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <script src="js_files/jquery/jquery-3.5.1.js"></script>
+    <script src="/db/db_init.js"></script>
+    <link rel="stylesheet" href="css_files/main.css">
+</head>
+<body>
+
+<ul id="database"></ul>
+<!-- insert url, username, password -->
+<form id="user-input-form" onsubmit="">
+
+    <input placeholder="URL" id="textbox-url" type="text" required><br />
+    <input placeholder="Username" id="textbox-username" type="text" required><br />
+    <input placeholder="Password" id="textbox-password" type="text" required><br />
+
+    <button id="submit-data" type="submit">Submit</button>
+
+</form>
+
+</body>
+</html>
