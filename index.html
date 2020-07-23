@@ -9,27 +9,36 @@
     <title>Sticky</title>
 </head>
 <body>
-<div id="add-button-container"><button id="add-button" onclick="addButton()">+</button></div>
+    <div id="add-button-container">
+        <button id="add-button">ADD</button>
+    </div>
+    <div id="wrapper">
+        <main id="table-container">
+            <table id="user-data-table" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>URL</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body"></tbody>
+            </table>
+        </main>
+    </div>
 
-<table id="user-data-table" style="width:100%">
-    <tr>
-    <tr>
-        <th>URL</th>
-        <th>Username</th>
-        <th>Password</th>
-    </tr>
-</table>
+<form id="user-input-form" method="POST" style="display: none;">
 
-<form id="user-input-form" method="POST" onsubmit="insertData()" style="display: none;">
+    <input placeholder="URL" id="textbox-url" type="text" name="url" required>
+    <input placeholder="Username" id="textbox-username" type="text" name="username" required>
+    <input placeholder="Password" id="textbox-password" type="text" name="password" required>
 
-    <input placeholder="URL" id="textbox-url" type="text" required>
-    <input placeholder="Username" id="textbox-username" type="text" required>
-    <input placeholder="Password" id="textbox-password" type="text" required>
-
-    <button id="submit-data" type="submit">Submit</button>
+    <button id="submit-data" type="submit">Add Account</button>
 
 </form>
 
+
 <script src="db/db_init.js"></script>
+<script src="js_files/main.js"></script>
 </body>
 </html>
