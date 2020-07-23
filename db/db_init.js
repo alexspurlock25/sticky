@@ -7,7 +7,7 @@ db.serialize(function(err) {
     if (err) {
         console.log(err.message)
     }
-
+    
     readData()
     db.close()
 
@@ -34,18 +34,15 @@ function readData () {
             let username_text = document.createTextNode(row.Username);
             let password_text = document.createTextNode(row.Password);
             let delete_button_elem = document.createElement("button");
-            delete_button_elem.id = "delete-button-" + row.rowid.toString();
-            let delete_button = document.getElementById("delete-button-"+row.rowid.toString());
-            console.log("id: " + row.rowid)
-            console.log(delete_button)
-            // delete_button.addEventListener("onclick", deleteRow)
+            delete_button_elem.setAttribute("id", row.rowid.toString());
+            delete_button_elem.setAttribute("class", "delete-button");
+            delete_button_elem.addEventListener("click", deleteRow, false);
             delete_button_elem.innerHTML = "DELETE";
 
             url_cell.appendChild(url_text);
             username_cell.appendChild(username_text);
             password_cell.appendChild(password_text);
             delete_button_cell.appendChild(delete_button_elem);
-
 
           });
     })
@@ -71,7 +68,22 @@ function insertRow () {
 }
 
 function deleteRow(e) {
-    console.log("delete button clicked")
+
+    let clicked_button_id = document.getElementById(this.id).id;
+    let db = new sqlite3.Database('user_db.sqlite');
+
+    db.serialize(function(err) {
+
+        if (err) {
+            console.log(err.message);
+        }
+        db.run("DELETE FROM tUserData WHERE rowid=?", [clicked_button_id]);
+        console.log(this.id + " was deleted.")
+
+    });
+    
+    db.close();
+
 }
 
 function addButton(e) {
@@ -87,6 +99,7 @@ function addButton(e) {
     } else {
         form.style.display = "none";
         button.innerText = "+";
+        form.reset();
 
     }
     
