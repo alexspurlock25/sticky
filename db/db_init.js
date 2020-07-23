@@ -15,7 +15,7 @@ db.serialize(function(err) {
 
 function readData () {
 
-    db.all("SELECT URL, Username, Password FROM tUserData", [], function(err, rows) {
+    db.all("SELECT rowid, URL, Username, Password FROM tUserData", [], function(err, rows) {
         if (err) {
             console.log(err.message)
         }
@@ -29,14 +29,17 @@ function readData () {
             let username_cell = new_row.insertCell(1);
             let password_cell = new_row.insertCell(2);
             let delete_button_cell = new_row.insertCell(3);
-            let id_cell = new_row.insertCell(4);
 
             let url_text = document.createTextNode(row.URL);
             let username_text = document.createTextNode(row.Username);
             let password_text = document.createTextNode(row.Password);
             let delete_button_elem = document.createElement("button");
-            // let id_text = document.createTextNode(id_cell);
-            delete_button_elem.innerHTML = "X";
+            delete_button_elem.id = "delete-button-" + row.rowid.toString();
+            let delete_button = document.getElementById("delete-button-"+row.rowid.toString());
+            console.log("id: " + row.rowid)
+            console.log(delete_button)
+            // delete_button.addEventListener("onclick", deleteRow)
+            delete_button_elem.innerHTML = "DELETE";
 
             url_cell.appendChild(url_text);
             username_cell.appendChild(username_text);
@@ -67,7 +70,7 @@ function insertRow () {
     db.close()
 }
 
-function deleteRow() {
+function deleteRow(e) {
     console.log("delete button clicked")
 }
 
