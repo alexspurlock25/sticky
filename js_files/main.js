@@ -1,7 +1,7 @@
 window.$ = require("jquery")
 
 $(document).ready( function () {
-    
+
     $.ajax({
         method: "GET",
         url: "http://localhost:3000/info",
@@ -31,10 +31,9 @@ $("#add-button").click( function (e) {
             "position": "absolute",
             "top": "20%"
         })
-        // wrapper.style.filter = "blur(4px)";
     
     } else {
-        // wrapper.style.filter = "none";
+
         $("#wrapper :button").prop("disabled", false)
 
         $("#user-input-form").css({
@@ -78,53 +77,57 @@ $("#user-input-form").submit( function (e) {
 })
 
 function addRow (info) {
-    console.log("URL: " + info.url)
-    console.log("Username: " + info.url)
-    console.log("Password: " + info.url)
-    console.log("ID: " + info.rowid)
 
-    // let row = "<tr>" +
-    // + "<td>" + info.url + "</td>" 
-    // + "<td>" + info.username + "</td>"
-    // + "<td>" + info.password + "</td>"
-    // + "<td><button class='delete-button' id='" + info.rowid + "' click='deleteRow'>DELETE</button></td>" 
-    // + "</tr>";
+    let row = "<tr id='row-"+info.InfoID+"'>"
+    + "<td>" + info.URL + "</td>"
+    + "<td>" + info.Username + "</td>"
+    + "<td>" + info.Password + "</td>"
+    + "<td><button class='delete-button' value='"+ info.InfoID +"' id='delete-button' onclick='deleteButton(this)' >DELETE</button></td>"
+    + "</tr>";
 
-    // $("#table-body").append(row)
+    $("#user-data-table").append(row)
 
-    // $("#user-data-table").load("index.html #user-data-table");
+}
 
+function deleteRow(info) {
+
+    let info_id = info.InfoID
+    $("#row-"+info_id).remove()
+
+}
+
+function deleteButton(clicked_button){
+    let button_value = $(clicked_button).attr("value")
+
+    $.ajax({
+        method: "POST",
+        cache: false,
+        url: "http://localhost:3000/delete",
+        data: {
+            infoid: button_value
+        },
+        success: function(response) {
+            deleteRow(response)
+            console.log("Row Deleted.")
+        },
+        error: function() {
+            console.log("ERROR: Can't delete row.")
+        }
+    })
 }
 
 function loadInfo (info) {
 
     info.forEach( function (item) {
 
-        let user_data_table = document.getElementById("table-body");
-        let new_row = user_data_table.insertRow(-1);
+        let row = "<tr id='row-"+item.InfoID+"'>"
+            +"<td>" + item.URL + "</td>"
+            + "<td>" + item.Username + "</td>"
+            + "<td>" + item.Password + "</td>"
+            + "<td><button class='delete-button' value='"+ item.InfoID +"' id='delete-button' onclick='deleteButton(this)' >DELETE</button></td>"
+            + "</tr>";
 
-        let url_cell = new_row.insertCell(0);
-        let username_cell = new_row.insertCell(1);
-        let password_cell = new_row.insertCell(2);
-        let delete_button_cell = new_row.insertCell(3);
-
-        let url_text = document.createTextNode(item.URL);
-        let username_text = document.createTextNode(item.Username);
-        let password_text = document.createTextNode(item.Password);
-        let delete_button_elem = document.createElement("button");
-        delete_button_elem.setAttribute("id", item.rowid.toString());
-        delete_button_elem.setAttribute("class", "delete-button");
-        delete_button_elem.addEventListener("click", deleteRow, false);
-        delete_button_elem.innerHTML = "DELETE";
-
-        url_cell.appendChild(url_text);
-        username_cell.appendChild(username_text);
-        password_cell.appendChild(password_text);
-        delete_button_cell.appendChild(delete_button_elem);
-
-
+        $("#user-data-table").append(row)
     })
-
-    // $("#user-data-table").load("index.html #user-data-table");
     
 }
