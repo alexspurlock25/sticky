@@ -5,7 +5,9 @@
   "main": "elect.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron ."
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "repository": {
     "type": "git",
@@ -18,14 +20,46 @@
   },
   "homepage": "https://github.com/alexspurlock25/sticky#readme",
   "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.52",
+    "@electron-forge/maker-deb": "^6.0.0-beta.52",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.52",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.52",
+    "@electron-forge/maker-zip": "^6.0.0-beta.52",
     "electron": "^9.1.1",
-    "electron-rebuild": "^1.11.0",
-    "sqlite3": "^5.0.0"
+    "electron-rebuild": "^1.11.0"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
-    "electron-express": "^1.0.0",
+    "electron-squirrel-startup": "^1.0.0",
     "express": "^4.17.1",
-    "jquery": "^3.5.1"
+    "jquery": "^3.5.1",
+    "sqlite3": "^5.0.0"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "sticky"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
   }
 }

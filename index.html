@@ -1,3 +1,6 @@
+<!-- Alexander Spurlock -->
+<!-- alexanderspurlock@gmail.com -->
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -17,8 +20,9 @@
             <table id="user-data-table" style="width:100%">
                 <thead>
                     <tr>
-                        <th>URL</th>
+                        <th>Title</th>
                         <th>Username</th>
+                        <th>Email</th>
                         <th>Password</th>
                     </tr>
                 </thead>
@@ -27,16 +31,16 @@
         </main>
     </div>
 
-<form id="user-input-form" method="POST" style="display: none;">
+  <form id="user-input-form" method="POST" style="display: none;">
 
-    <input placeholder="URL" id="textbox-url" type="text" name="url" required>
-    <input placeholder="Username" id="textbox-username" type="text" name="username" required>
-    <input placeholder="Password" id="textbox-password" type="text" name="password" required>
+    <input type="text" name="url" placeholder="Title" id="textbox-url">
+    <input type="text" name="username" placeholder="Username" id="textbox-username">
+    <input type="text" name="email" placeholder="Email" id="textbox-email">
+    <input type="password" name="password" placeholder="Password" id="textbox-password">
 
     <button id="submit-data" type="submit">Add Account</button>
 
-</form>
-
+  </form>
 
 <script src="db/db_init.js"></script>
 <script src="js_files/main.js"></script>

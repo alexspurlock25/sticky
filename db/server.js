@@ -16,12 +16,9 @@ app.get("/info", function (req, res) {
 })
 
 app.post("/add", function (req, res) {
-    user_info.addInfo(req.body).then ( function (response) {
-       res.json( {
-            URL: req.body.url,
-            Username: req.body.username,
-            Password: req.body.password
-        } )
+    user_info.addInfo(req.body).then ( function () {
+
+      res.json(req.body)
 
     }).catch( function () {
 
@@ -31,7 +28,7 @@ app.post("/add", function (req, res) {
 app.post("/delete", function (req, res) {
     user_info.removeInfo(req.body.infoid).then( function (response) {
         res.json( {
-            InfoID: req.body.infoid
+            infoid: req.body.infoid
         } )
     }).catch( function () {
 
@@ -42,4 +39,3 @@ app.listen(3000, function () {
 
     console.log("PORT OPEN: 3000");
 })
-

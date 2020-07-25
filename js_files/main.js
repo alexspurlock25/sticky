@@ -31,7 +31,7 @@ $("#add-button").click( function (e) {
             "position": "absolute",
             "top": "20%"
         })
-    
+
     } else {
 
         $("#wrapper :button").prop("disabled", false)
@@ -41,7 +41,6 @@ $("#add-button").click( function (e) {
         })
         $("#add-button").text("ADD")
 
-        
     }
 
 })
@@ -51,8 +50,9 @@ $("#user-input-form").submit( function (e) {
 
     let url = $("#textbox-url").val()
     let username = $("#textbox-username").val()
+    let email = $("#textbox-email").val()
     let password = $("#textbox-password").val()
-        
+
     $.ajax({
         method: "POST",
         cache: false,
@@ -60,29 +60,31 @@ $("#user-input-form").submit( function (e) {
         data: {
             url: url,
             username: username,
+            email: email,
             password: password
         },
         success: function(response) {
             addRow(response)
             console.log("Row Added.")
         },
-        error: function() {
+        error: function(response) {
             console.log("ERROR: Can't add row.")
         }
     })
     $("#user-input-form").trigger("reset").css({"display": "none"})
     $("#wrapper :button").prop("disabled", false)
     $("#add-button").text("ADD")
-    
+
 })
 
 function addRow (info) {
 
-    let row = "<tr id='row-"+info.InfoID+"'>"
-    + "<td>" + info.URL + "</td>"
-    + "<td>" + info.Username + "</td>"
-    + "<td>" + info.Password + "</td>"
-    + "<td><button class='delete-button' value='"+ info.InfoID +"' id='delete-button' onclick='deleteButton(this)' >DELETE</button></td>"
+    let row = "<tr id='row-"+info.id+"'>"
+    + "<td>" + info.url + "</td>"
+    + "<td>" + info.username + "</td>"
+    + "<td>" + info.email + "</td>"
+    + "<td>" + info.password + "</td>"
+    + "<td><button class='delete-button' value='"+ info.id +"' id='delete-button' onclick='deleteButton(this)' >DELETE</button></td>"
     + "</tr>";
 
     $("#user-data-table").append(row)
@@ -90,9 +92,10 @@ function addRow (info) {
 }
 
 function deleteRow(info) {
+  console.log(info);
 
-    let info_id = info.InfoID
-    $("#row-"+info_id).remove()
+    let infoid = info.infoid
+    $("#row-"+infoid).remove()
 
 }
 
@@ -120,14 +123,15 @@ function loadInfo (info) {
 
     info.forEach( function (item) {
 
-        let row = "<tr id='row-"+item.InfoID+"'>"
-            +"<td>" + item.URL + "</td>"
-            + "<td>" + item.Username + "</td>"
-            + "<td>" + item.Password + "</td>"
-            + "<td><button class='delete-button' value='"+ item.InfoID +"' id='delete-button' onclick='deleteButton(this)' >DELETE</button></td>"
+        let row = "<tr id='row-"+item.id+"'>"
+            +"<td>" + item.url + "</td>"
+            + "<td>" + item.username + "</td>"
+            + "<td>" + item.email + "</td>"
+            + "<td>" + item.password + "</td>"
+            + "<td><button class='delete-button' value='"+ item.id +"' id='delete-button' onclick='deleteButton(this)' >DELETE</button></td>"
             + "</tr>";
 
         $("#user-data-table").append(row)
     })
-    
+
 }

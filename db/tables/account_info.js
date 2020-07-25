@@ -8,16 +8,16 @@ return new Promise( function (resolve, reject) {
 
     db.serialize( function () {
 
-        db.all("SELECT InfoID, URL, Username, Password FROM tUserData", function (err, rows) {
-                // console.log(rows)
+        db.all("SELECT id, url, username, email, password FROM tUserData", function (err, rows) {
+
             if (!err) {
                 resolve(rows)
             } else {
                 reject(err)
             }
-    
+
         })
-    
+
     })
     db.close()
 
@@ -29,11 +29,11 @@ module.exports.addInfo = function (data) {
 let db = new sqlite3.Database(path.join (__dirname, "../user_database.sql"))
 
 return new Promise ( function (resolve, reject) {
-    
+
     db.serialize( function () {
 
-        db.run("INSERT INTO tUserData (URL, Username, Password) VALUES (?, ?, ?);", [data.url, data.username, data.password], function (err, rows) {
-            
+        db.run("INSERT INTO tUserData (url, username, email, password) VALUES (?, ?, ?, ?);", [data.url, data.username, data.email, data.password], function (err, rows) {
+
             if (!err) {
                 resolve(rows)
             } else {
@@ -55,7 +55,7 @@ module.exports.removeInfo = function (row_to_delete) {
 
         db.serialize(function() {
 
-            db.run("DELETE FROM tUserData WHERE rowid=(?)", [row_to_delete], function (err, rows) {
+            db.run("DELETE FROM tUserData WHERE id=(?)", [row_to_delete], function (err, rows) {
 
                 if(!err) {
                     resolve(rows)
