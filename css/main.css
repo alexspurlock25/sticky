@@ -9,7 +9,10 @@
     margin-right: 10px;
     clear: both;
 }
-#add-button, #edit-button, #delete-button, #user-input-form button {
+#add-button, #edit-button, #save-button {
+    margin-left: 10px;
+}
+#add-button, #edit-button, #save-button, #delete-button, #user-input-form button {
     float: right;
     width: 90px;
     height: 35px;
@@ -19,20 +22,41 @@
     border-radius: 4px;
     transition-duration: 500ms;
 }
-#add-button:hover, #edit-button:hover, #delete-button:hover, #user-input-form button:hover {
+#add-button:hover, #edit-button:hover, #delete-button:hover, #save-button:hover, #user-input-form button:hover {
     cursor: pointer;
     background-color: white;
     color: black;
     border: 1px solid #555555;
 }
-table {
-    table-layout: fixed;
+#user-data-table {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+  table-layout: fixed;
 }
-td {
-  border-bottom: 1px solid #ddd;
+#user-data-table td, #user-data-table th {
+  height: 50px;
+}
+#user-data-table tbody td {
+  border-bottom: 1px solid #DFDFDF;
+  font-size: 14pt;
+  color: #000000;
+  width: 30%;
+}
+#user-data-table thead {
+  border-bottom: 2px solid #000000;
+}
+#user-data-table thead th {
+  font-size: 15px;
+  font-weight: bold;
+  color: #000000;
+  text-align: left;
+}
+tr {
+  cursor: default;
 }
 /* ADD FORM */
-#user-input-form {
+#user-input-form, #user-edit-form {
     background-color: white;
     border-radius: 4px;
     height: 300px;

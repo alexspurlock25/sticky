@@ -20,12 +20,13 @@
     <div id="wrapper">
         <main id="table-container">
             <table id="user-data-table" style="width:100%">
-                <thead>
+                <thead id="table-head">
                     <tr>
                         <th>Title</th>
                         <th>Username</th>
                         <th>Email</th>
                         <th>Password</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody id="table-body"></tbody>
@@ -33,7 +34,17 @@
         </main>
     </div>
 
-  <form id="user-input-form" method="POST" style="display: none;">
+  <form id="user-input-form" method="POST">
+
+    <input type="text" name="url" placeholder="Title" id="textbox-url" required>
+    <input type="text" name="username" placeholder="Username" id="textbox-username">
+    <input type="email" name="email" placeholder="Email" id="textbox-email">
+    <input type="password" name="password" placeholder="Password" id="textbox-password">
+
+    <button id="submit-data" type="submit">Add Account</button>
+
+  </form>
+  <form id="user-edit-form" method="POST">
 
     <input type="text" name="url" placeholder="Title" id="textbox-url" required>
     <input type="text" name="username" placeholder="Username" id="textbox-username">
