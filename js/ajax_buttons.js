@@ -79,7 +79,7 @@ $("#user-input-form").submit( function (e) {
 
 function addRow (info) {
 
-    let row = "<tr id='row-"+info.id+"'>"
+    let row = "<tr id='row-" + info.infoid + "'>"
     + "<td>" + info.url + "</td>"
     + "<td>" + info.username + "</td>"
     + "<td>" + info.email + "</td>"
@@ -92,11 +92,8 @@ function addRow (info) {
 }
 
 function deleteRow(info) {
-  console.log(info);
-
     let infoid = info.infoid
     $("#row-"+infoid).remove()
-
 }
 
 function deleteButton(clicked_button){
@@ -123,12 +120,12 @@ function loadInfo (info) {
 
     info.forEach( function (item) {
 
-        let row = "<tr id='row-"+item.id+"'>"
+        let row = "<tr id='row-" + item.infoid + "'>"
             +"<td>" + item.url + "</td>"
             + "<td>" + item.username + "</td>"
             + "<td>" + item.email + "</td>"
             + "<td>" + item.password + "</td>"
-            + "<td><button class='delete-button' value='"+ item.id +"' id='delete-button' onclick='deleteButton(this)' >DELETE</button></td>"
+            + "<td><button class='delete-button' value='"+ item.infoid +"' id='delete-button' onclick='deleteButton(this)' >DELETE</button></td>"
             + "</tr>";
 
         $("#user-data-table").append(row)

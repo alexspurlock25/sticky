@@ -2,7 +2,7 @@
   "name": "sticky",
   "version": "1.0.0",
   "description": "A basic, minimalistic, offline, account manager. Stores and sorts username, emails, and passwords.  https://github.com/alexspurlock25/sticky.git",
-  "main": "elect.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron-forge start",

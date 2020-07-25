@@ -9,7 +9,7 @@
     margin-right: 10px;
     clear: both;
 }
-#add-button, .delete-button, #user-input-form button {
+#add-button, #edit-button, #delete-button, #user-input-form button {
     float: right;
     width: 90px;
     height: 35px;
@@ -19,7 +19,7 @@
     border-radius: 4px;
     transition-duration: 500ms;
 }
-#add-button:hover, .delete-button:hover, #user-input-form button:hover {
+#add-button:hover, #edit-button:hover, #delete-button:hover, #user-input-form button:hover {
     cursor: pointer;
     background-color: white;
     color: black;
@@ -28,17 +28,14 @@
 table {
     table-layout: fixed;
 }
-th, td {
+td {
   border-bottom: 1px solid #ddd;
-}
-tr:hover {
-  background-color: #f5f5f5;
 }
 /* ADD FORM */
 #user-input-form {
     background-color: white;
     border-radius: 4px;
-    height: 250px;
+    height: 300px;
     width: 400px;
     left: 50%;
     top: 50%;

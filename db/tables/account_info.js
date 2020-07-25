@@ -8,7 +8,7 @@ return new Promise( function (resolve, reject) {
 
     db.serialize( function () {
 
-        db.all("SELECT id, url, username, email, password FROM tUserData", function (err, rows) {
+        db.all("SELECT infoid, url, username, email, password FROM tUserData", function (err, rows) {
 
             if (!err) {
                 resolve(rows)
@@ -55,7 +55,7 @@ module.exports.removeInfo = function (row_to_delete) {
 
         db.serialize(function() {
 
-            db.run("DELETE FROM tUserData WHERE id=(?)", [row_to_delete], function (err, rows) {
+            db.run("DELETE FROM tUserData WHERE infoid=(?)", [row_to_delete], function (err, rows) {
 
                 if(!err) {
                     resolve(rows)

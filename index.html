@@ -8,12 +8,14 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
-    <link rel="stylesheet" href="css_files/main.css">
+    <link rel="stylesheet" href="css/main.css">
     <title>Sticky</title>
 </head>
 <body>
-    <div id="add-button-container">
-        <button id="add-button">ADD</button>
+
+    <div id="function-button-container">
+        <button type="button" name="function-button" id="add-button">ADD</button>
+        <button type="button" name="function-button" id="edit-button">EDIT</button>
     </div>
     <div id="wrapper">
         <main id="table-container">
@@ -33,16 +35,16 @@
 
   <form id="user-input-form" method="POST" style="display: none;">
 
-    <input type="text" name="url" placeholder="Title" id="textbox-url">
+    <input type="text" name="url" placeholder="Title" id="textbox-url" required>
     <input type="text" name="username" placeholder="Username" id="textbox-username">
-    <input type="text" name="email" placeholder="Email" id="textbox-email">
+    <input type="email" name="email" placeholder="Email" id="textbox-email">
     <input type="password" name="password" placeholder="Password" id="textbox-password">
 
     <button id="submit-data" type="submit">Add Account</button>
 
   </form>
 
-<script src="db/db_init.js"></script>
-<script src="js_files/main.js"></script>
+<script src="db/initialize_db.js"></script>
+<script src="js/ajax_buttons.js"></script>
 </body>
 </html>
