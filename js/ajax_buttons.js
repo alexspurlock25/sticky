@@ -25,7 +25,7 @@ $("#add-button").click( function (e) {
     if ($("#user-input-form").css("display") === "none") {
 
       $("#add-button").text("CANCEL")
-      $("#edit-button").hide()
+      $("#edit-button-main").hide()
 
       $("#wrapper :button").prop("disabled", true)
       $("#user-input-form").show(300)
@@ -37,7 +37,7 @@ $("#add-button").click( function (e) {
     } else {
 
         $("#wrapper :button").prop("disabled", false)
-        $("#edit-button").show()
+        $("#edit-button-main").show()
         $("#user-input-form").hide(100)
         $("#add-button").text("ADD")
 
@@ -45,33 +45,11 @@ $("#add-button").click( function (e) {
 
 })
 
-$("#edit-button").click( function (e) {
+$("#edit-button-main").click( function (e) {
 
   if ($("#table-body td:last-child").css("display") === "none") {
 
-      $("#table-body tr").hover( function () {
-          $(this).css({
-            "cursor": "pointer",
-            "background-color": "red"
-          }).click( function () {
-
-              console.log($(this).attr("id"))
-
-              $("#user-edit-form").show(300)
-              $("#user-edit-form").css({
-                  "position": "absolute",
-                  "top": "20%"
-              })
-
-          })
-        }, function () {
-          $(this).css({
-            "cursor": "default",
-            "background-color": "white"
-          })
-      })
-
-      $("#edit-button").text("CENCEL")
+      $("#edit-button-main").text("CENCEL")
 
       $("#add-button").hide()
 
@@ -80,7 +58,7 @@ $("#edit-button").click( function (e) {
 
   } else {
 
-      $("#edit-button").text("EDIT")
+      $("#edit-button-main").text("EDIT")
 
       $("#add-button").show()
 
@@ -94,10 +72,21 @@ $("#edit-button").click( function (e) {
 
 })
 
+function edit_row(clicked_row) {
+
+    let row_to_edit = $(clicked_row).attr("value")
+    let url = $("#textbox-url").val()
+    let username = $("#textbox-username").val()
+    let email = $("#textbox-email").val()
+    let password = $("#textbox-password").val()
+
+    $("#user-edit-form").show(300)
+
+
+}
+
 $("#user-input-form").submit( function (e) {
     e.preventDefault()
-
-
 
     let url = $("#textbox-url").val()
     let username = $("#textbox-username").val()
@@ -136,11 +125,11 @@ function add_row(info) {
     + "<td>" + info.username + "</td>"
     + "<td>" + info.email + "</td>"
     + "<td>" + info.password + "</td>"
-    + "<td><button class='delete-button' value='"+ info.id +"' id='delete-button' onclick='delete_row(this)' style='display: none;' >DELETE</button></td>"
+    + "<td><button class='edit-button' value='"+ info.infoid +"' id='edit-button' onclick='edit_row(this)'>EDIT</button><button class='delete-button' value='"+ info.infoid +"' id='delete-button' onclick='delete_row(this)'>DELETE</button></td>"
     + "</tr>";
 
     $("#user-data-table").append(row)
-    $("#edit-button").show()
+    $("#edit-button-main").show()
 
 }
 
@@ -173,7 +162,7 @@ function load_all_info(info) {
             + "<td>" + item.username + "</td>"
             + "<td>" + item.email + "</td>"
             + "<td>" + item.password + "</td>"
-            + "<td><button class='delete-button' value='"+ item.infoid +"' id='delete-button' onclick='delete_row(this)'>DELETE</button></td>"
+            + "<td><button class='edit-button' value='"+ item.infoid +"' id='edit-button' onclick='edit_row(this)'>EDIT</button><button class='delete-button' value='"+ item.infoid +"' id='delete-button' onclick='delete_row(this)'>DELETE</button></td>"
             + "</tr>";
 
         $("#user-data-table").append(row)
