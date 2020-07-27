@@ -1,26 +1,23 @@
 <!-- Alexander Spurlock -->
 <!-- alexanderspurlock@gmail.com -->
-
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
     <link rel="stylesheet" href="css/main.css">
     <title>Sticky</title>
 </head>
 <body>
 
-    <div id="function-button-container">
-        <button type="button" name="function-button" id="add-button">ADD</button>
-        <button type="button" name="function-button" id="edit-button-main">EDIT</button>
+    <div id="menu-container">
+        <button type="button" id="add-btn-menu">Add</button>
+        <button type="button" id="edit-btn-menu">Edit</button>
     </div>
     <div id="wrapper">
-        <main id="table-container">
-            <table id="user-data-table" style="width:100%">
-                <thead id="table-head">
+      <main>
+            <table>
+                <thead>
                     <tr>
                         <th>Title</th>
                         <th>Username</th>
@@ -29,30 +26,28 @@
                         <th></th>
                     </tr>
                 </thead>
-                <tbody id="table-body"></tbody>
+                <tbody></tbody>
             </table>
-        </main>
+      </main>
     </div>
 
-  <form id="user-input-form" method="POST">
+  <form id="add-form" method="POST">
+    <input type="text" placeholder="Title *" id="textbox-url" required>
+    <input type="text" placeholder="Username" id="textbox-username">
+    <input type="email" placeholder="Email" id="textbox-email">
+    <input type="password" placeholder="Password" id="textbox-password">
 
-    <input type="text" name="url" placeholder="Title" id="textbox-url" required>
-    <input type="text" name="username" placeholder="Username" id="textbox-username">
-    <input type="email" name="email" placeholder="Email" id="textbox-email">
-    <input type="password" name="password" placeholder="Password" id="textbox-password">
-
-    <button id="submit-data" type="submit">Add Account</button>
-
+    <button type="submit">Add Account</button>
   </form>
-  <form id="user-edit-form" method="POST">
 
-    <input type="text" name="url" placeholder="Title" id="textbox-url" required>
-    <input type="text" name="username" placeholder="Username" id="textbox-username">
-    <input type="email" name="email" placeholder="Email" id="textbox-email">
-    <input type="password" name="password" placeholder="Password" id="textbox-password">
+  <form id="edit-form" method="POST">
+    <input type="text" placeholder="Title *" id="textbox-url" required>
+    <input type="text" placeholder="Username" id="textbox-username">
+    <input type="email" placeholder="Email" id="textbox-email">
+    <input type="password" placeholder="Password" id="textbox-password">
 
-    <button id="submit-data" type="submit">Add Account</button>
-
+    <button type="submit">Edit Account</button>
+    <button type="button" id="edit-cancel-btn">Cencel Edit</button>
   </form>
 
 <script src="db/initialize_db.js"></script>

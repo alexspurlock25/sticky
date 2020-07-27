@@ -2,16 +2,16 @@ window.$ = require("jquery")
 
 $(document).ready( function () {
 
-  $("#user-input-form").hide()
-  $("#user-edit-form").hide()
+  $("#add-form").hide()
+  $("#edit-form").hide()
 
     $.ajax({
         method: "GET",
         url: "http://localhost:3000/info",
         success: function (response) {
             load_all_info(response)
-            $("#table-body td:last-child").hide()
-            $("#table-head th:last-child").hide()
+            $("tbody td:last-child").hide()
+            $("thead th:last-child").hide()
         },
         error: function(){
             console.log("Error: Failed to load data.")
@@ -20,16 +20,16 @@ $(document).ready( function () {
 
 })
 
-$("#add-button").click( function (e) {
+$("#add-btn-menu").click( function (e) {
 
-    if ($("#user-input-form").css("display") === "none") {
+    if ($("#add-form").css("display") === "none") {
 
-      $("#add-button").text("CANCEL")
-      $("#edit-button-main").hide()
+      $("#add-btn-menu").text("CANCEL")
+      $("#edit-btn-menu").hide()
 
       $("#wrapper :button").prop("disabled", true)
-      $("#user-input-form").show(300)
-      $("#user-input-form").css({
+      $("#add-form").show(300)
+      $("#add-form").css({
           "position": "absolute",
           "top": "20%"
       })
@@ -37,55 +37,78 @@ $("#add-button").click( function (e) {
     } else {
 
         $("#wrapper :button").prop("disabled", false)
-        $("#edit-button-main").show()
-        $("#user-input-form").hide(100)
-        $("#add-button").text("ADD")
+        $("#edit-btn-menu").show()
+        $("#add-form").hide(300)
+        $("#add-btn-menu").text("ADD")
 
     }
 
 })
 
-$("#edit-button-main").click( function (e) {
+$("#edit-btn-menu").click( function (e) {
 
-  if ($("#table-body td:last-child").css("display") === "none") {
+  if ($("tbody td:last-child").css("display") === "none") {
 
-      $("#edit-button-main").text("CENCEL")
+      $("#edit-btn-menu").text("CENCEL")
 
-      $("#add-button").hide()
+      $("#add-btn-menu").hide()
 
-      $("#table-body td:last-child").show(200)
-      $("#table-head th:last-child").show(200)
+      $("tbody td:last-child").show(200)
+      $("thead th:last-child").show(200)
 
   } else {
 
-      $("#edit-button-main").text("EDIT")
+      $("#edit-btn-menu").text("EDIT")
 
-      $("#add-button").show()
+      $("#add-btn-menu").show()
 
-      $("#table-body td:last-child").hide(200)
-      $("#table-head th:last-child").hide(200)
+      $("tbody td:last-child").hide(200)
+      $("thead th:last-child").hide(200)
 
-      $("tr").css({
-          "curser": "default"
-      })
   }
 
 })
 
 function edit_row(clicked_row) {
 
-    let row_to_edit = $(clicked_row).attr("value")
-    let url = $("#textbox-url").val()
-    let username = $("#textbox-username").val()
-    let email = $("#textbox-email").val()
-    let password = $("#textbox-password").val()
+    let row_num = $(clicked_row).attr("value")
+    let url = $("#row-" + row_num + " #td-url").text()
+    let username = $("#row-" + row_num + " #td-username").text()
+    let email = $("#row-" + row_num + " #td-email").text()
+    let password = $("#row-" + row_num + " #td-password").text()
 
-    $("#user-edit-form").show(300)
+    $("#edit-form #textbox-url").attr("value", url)
+    $("#edit-form #textbox-username").attr("value", username)
+    $("#edit-form #textbox-email").attr("value", email)
+    $("#edit-form #textbox-password").attr("value", password)
 
+    $("#edit-form").show(300)
 
 }
+$("#edit-form").submit( function(e) {
 
-$("#user-input-form").submit( function (e) {
+  $.ajax({
+      method: "GET",
+      url: "http://localhost:3000/info",
+      success: function (response) {
+        check_difference(response, row_num, url, username, email, password)
+      },
+      error: function(){
+          console.log("Error: Failed to load data.")
+      }
+  })
+
+})
+function check_difference(info, row_num, url, username, email, password) {
+  info.forEach((item) => {
+    if((item.infoid === row_num) && item.url !== url) {
+      console.log("url is different");
+    }
+  })
+}
+
+
+$("#add-form").submit( function (e) {
     e.preventDefault()
 
     let url = $("#textbox-url").val()
@@ -105,31 +128,31 @@ $("#user-input-form").submit( function (e) {
         },
         success: function(response) {
             add_row(response)
-            $("#table-body td:last-child").hide()
-            $("#table-head th:last-child").hide()
+            $("tbody td:last-child").hide()
+            $("thead th:last-child").hide()
             console.log("Row Added.")
         },
         error: function(response) {
             console.log("ERROR: Can't add row.")
         }
     })
-    $("#user-input-form").trigger("reset").css({"display": "none"})
-    $("#add-button").text("ADD")
+    $("#add-form").trigger("reset").css({"display": "none"})
+    $("#add-btn-menu").text("ADD")
 
 })
 
-function add_row(info) {
+function add_row(item) {
 
-    let row = "<tr id='row-" + info.infoid + "'>"
-    + "<td>" + info.url + "</td>"
-    + "<td>" + info.username + "</td>"
-    + "<td>" + info.email + "</td>"
-    + "<td>" + info.password + "</td>"
-    + "<td><button class='edit-button' value='"+ info.infoid +"' id='edit-button' onclick='edit_row(this)'>EDIT</button><button class='delete-button' value='"+ info.infoid +"' id='delete-button' onclick='delete_row(this)'>DELETE</button></td>"
-    + "</tr>";
+  let row = "<tr id='row-" + item.infoid + "'>"
+      + "<td id='td-url'>" + item.url + "</td>"
+      + "<td id='td-username'>" + item.username + "</td>"
+      + "<td id='td-email'>" + item.email + "</td>"
+      + "<td id='td-password'>" + item.password + "</td>"
+      + "<td><button class='edit-btn-row' value='"+ item.infoid +"' id='edit-btn-row' onclick='edit_row(this)'>EDIT</button><button class='delete-btn-row' value='"+ item.infoid +"' id='delete-btn-row' onclick='delete_row(this)'>DELETE</button></td>"
+      + "</tr>";
 
-    $("#user-data-table").append(row)
-    $("#edit-button-main").show()
+    $("table").append(row)
+    $("#edit-btn-menu").show()
 
 }
 
@@ -158,13 +181,18 @@ function load_all_info(info) {
     info.forEach( function (item) {
 
         let row = "<tr id='row-" + item.infoid + "'>"
-            +"<td>" + item.url + "</td>"
-            + "<td>" + item.username + "</td>"
-            + "<td>" + item.email + "</td>"
-            + "<td>" + item.password + "</td>"
-            + "<td><button class='edit-button' value='"+ item.infoid +"' id='edit-button' onclick='edit_row(this)'>EDIT</button><button class='delete-button' value='"+ item.infoid +"' id='delete-button' onclick='delete_row(this)'>DELETE</button></td>"
+            + "<td id='td-url'>" + item.url + "</td>"
+            + "<td id='td-username'>" + item.username + "</td>"
+            + "<td id='td-email'>" + item.email + "</td>"
+            + "<td id='td-password'>" + item.password + "</td>"
+            + "<td><button class='edit-btn-row' value='"+ item.infoid +"' id='edit-btn-row' onclick='edit_row(this)'>EDIT</button><button class='delete-btn-row' value='"+ item.infoid +"' id='delete-btn-row' onclick='delete_row(this)'>DELETE</button></td>"
             + "</tr>";
 
-        $("#user-data-table").append(row)
+        $("table").append(row)
     })
 }
+
+$("#edit-cancel-btn").click( function () {
+  $("#edit-form").hide(300)
+  $("#edit-form").attr("value", "")
+})
