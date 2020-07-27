@@ -28,17 +28,13 @@ $("#add-btn-menu").click( function (e) {
       $("#edit-btn-menu").hide()
 
       $("#wrapper :button").prop("disabled", true)
-      $("#add-form").show(300)
-      $("#add-form").css({
-          "position": "absolute",
-          "top": "20%"
-      })
+      $("#add-form").show()
 
     } else {
 
         $("#wrapper :button").prop("disabled", false)
         $("#edit-btn-menu").show()
-        $("#add-form").hide(300)
+        $("#add-form").hide()
         $("#add-btn-menu").text("ADD")
 
     }
@@ -50,20 +46,22 @@ $("#edit-btn-menu").click( function (e) {
   if ($("tbody td:last-child").css("display") === "none") {
 
       $("#edit-btn-menu").text("CENCEL")
+      $("table").addClass("table-hover")
 
       $("#add-btn-menu").hide()
 
-      $("tbody td:last-child").show(200)
-      $("thead th:last-child").show(200)
+      $("tbody td:last-child").show()
+      $("thead th:last-child").show()
 
   } else {
 
       $("#edit-btn-menu").text("EDIT")
+      $("table").removeClass("table-hover")
 
       $("#add-btn-menu").show()
 
-      $("tbody td:last-child").hide(200)
-      $("thead th:last-child").hide(200)
+      $("tbody td:last-child").hide()
+      $("thead th:last-child").hide()
 
   }
 
@@ -82,7 +80,7 @@ function edit_row(clicked_row) {
     $("#edit-form #textbox-email").attr("value", email)
     $("#edit-form #textbox-password").attr("value", password)
 
-    $("#edit-form").show(300)
+    $("#edit-form").show()
 
 }
 $("#edit-form").submit( function(e) {
@@ -143,12 +141,12 @@ $("#add-form").submit( function (e) {
 
 function add_row(item) {
 
-  let row = "<tr id='row-" + item.infoid + "'>"
+  let row = "<tr scope='row' id='row-" + item.infoid + "'>"
       + "<td id='td-url'>" + item.url + "</td>"
       + "<td id='td-username'>" + item.username + "</td>"
       + "<td id='td-email'>" + item.email + "</td>"
       + "<td id='td-password'>" + item.password + "</td>"
-      + "<td><button class='edit-btn-row' value='"+ item.infoid +"' id='edit-btn-row' onclick='edit_row(this)'>EDIT</button><button class='delete-btn-row' value='"+ item.infoid +"' id='delete-btn-row' onclick='delete_row(this)'>DELETE</button></td>"
+      + "<td><button  class='btn btn-outline-primary' value='"+ item.infoid +"' id='edit-btn-row' onclick='edit_row(this)'>EDIT</button><button  class='btn btn-outline-primary' value='"+ item.infoid +"' id='delete-btn-row' onclick='delete_row(this)'>DELETE</button></td>"
       + "</tr>";
 
     $("table").append(row)
@@ -180,12 +178,12 @@ function load_all_info(info) {
 
     info.forEach( function (item) {
 
-        let row = "<tr id='row-" + item.infoid + "'>"
+        let row = "<tr scope='row' id='row-" + item.infoid + "'>"
             + "<td id='td-url'>" + item.url + "</td>"
             + "<td id='td-username'>" + item.username + "</td>"
             + "<td id='td-email'>" + item.email + "</td>"
             + "<td id='td-password'>" + item.password + "</td>"
-            + "<td><button class='edit-btn-row' value='"+ item.infoid +"' id='edit-btn-row' onclick='edit_row(this)'>EDIT</button><button class='delete-btn-row' value='"+ item.infoid +"' id='delete-btn-row' onclick='delete_row(this)'>DELETE</button></td>"
+            + "<td><button class='btn btn-outline-primary' value='"+ item.infoid +"' id='edit-btn-row' onclick='edit_row(this)'>EDIT</button><button  class='btn btn-outline-primary' value='"+ item.infoid +"' id='delete-btn-row' onclick='delete_row(this)'>DELETE</button></td>"
             + "</tr>";
 
         $("table").append(row)
@@ -193,6 +191,6 @@ function load_all_info(info) {
 }
 
 $("#edit-cancel-btn").click( function () {
-  $("#edit-form").hide(300)
+  $("#edit-form").hide()
   $("#edit-form").attr("value", "")
 })

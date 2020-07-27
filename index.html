@@ -4,26 +4,59 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
-    <link rel="stylesheet" href="css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' http://* 'unsafe-inline';" />
+
     <title>Sticky</title>
 </head>
 <body>
 
     <div id="menu-container">
-        <button type="button" id="add-btn-menu">Add</button>
-        <button type="button" id="edit-btn-menu">Edit</button>
+        <button type="button" class="mdc-button--raised" id="add-btn-menu"><span class="mdc-button__label">ADD</span></button>
+        <button type="button" class="btn btn-outline-primary" id="edit-btn-menu">EDIT</button>
     </div>
+    <form id="add-form" method="POST">
+        <div class="form-group row">
+          <label for="textbox-url" class="col-2 col-form-label" ></label>
+          <small class="form-text text-muted">Eveything is stored locally.</small>
+          <input type="text" placeholder="Title *" id="textbox-url" class="form-control" required>
+        </div>
+        <div class="col-md-4 mb-3">
+          <input type="text" placeholder="Username" id="textbox-username" class="form-control">
+        </div>
+        <div class="col-md-4 mb-3">
+          <input type="email" placeholder="Email" id="textbox-email" class="form-control">
+        </div>
+        <div class="col-md-4 mb-3">
+          <input type="password" placeholder="Password" id="textbox-password" class="form-control">
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <button type="submit" class="btn btn-outline-primary">Add Account</button>
+        </div>
+    </form>
+
+    <form id="edit-form" method="POST">
+      <div class="form-group">
+        <input type="text" placeholder="Title *" id="textbox-url" required  class="form-control">
+        <input type="text" placeholder="Username" id="textbox-username" class="form-control">
+        <input type="email" placeholder="Email" id="textbox-email" class="form-control">
+        <input type="password" placeholder="Password" id="textbox-password" class="form-control">
+
+        <button type="submit" class="btn btn-outline-primary">Edit Account</button>
+        <button type="button"  class="btn btn-outline-primary" id="edit-cancel-btn">Cencel Edit</button>
+      </div>
+    </form>
     <div id="wrapper">
       <main>
-            <table>
-                <thead>
+            <table class="table">
+                <thead class="thead-dark">
                     <tr>
-                        <th>Title</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Password</th>
-                        <th></th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Password</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -31,25 +64,10 @@
       </main>
     </div>
 
-  <form id="add-form" method="POST">
-    <input type="text" placeholder="Title *" id="textbox-url" required>
-    <input type="text" placeholder="Username" id="textbox-username">
-    <input type="email" placeholder="Email" id="textbox-email">
-    <input type="password" placeholder="Password" id="textbox-password">
-
-    <button type="submit">Add Account</button>
-  </form>
-
-  <form id="edit-form" method="POST">
-    <input type="text" placeholder="Title *" id="textbox-url" required>
-    <input type="text" placeholder="Username" id="textbox-username">
-    <input type="email" placeholder="Email" id="textbox-email">
-    <input type="password" placeholder="Password" id="textbox-password">
-
-    <button type="submit">Edit Account</button>
-    <button type="button" id="edit-cancel-btn">Cencel Edit</button>
-  </form>
-
+<script src="js/jquery/jquery-3.0.0.slim.js" charset="utf-8"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="db/initialize_db.js"></script>
 <script src="js/ajax_buttons.js"></script>
 </body>
