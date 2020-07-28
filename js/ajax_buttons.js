@@ -20,21 +20,21 @@ $(document).ready( function () {
 
 })
 
-$("#add-btn-menu").click( function (e) {
+$("#add-btn-menu").click( function () {
 
     if ($("#add-form").css("display") === "none") {
 
       $("#add-btn-menu").text("CANCEL")
-      $("#edit-btn-menu").hide()
+      $("#edit-btn-menu").hide(300)
 
       $("#wrapper :button").prop("disabled", true)
-      $("#add-form").show()
+      $("#add-form").show(300)
 
     } else {
 
         $("#wrapper :button").prop("disabled", false)
-        $("#edit-btn-menu").show()
-        $("#add-form").hide()
+        $("#edit-btn-menu").show(300)
+        $("#add-form").hide(300)
         $("#add-btn-menu").text("ADD")
 
     }
