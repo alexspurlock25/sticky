@@ -5,7 +5,9 @@ function createWindow () {
     const win = new BrowserWindow({
 
         width: 900,
+        minWidth: 550,
         height: 800,
+        minHeight: 550,
         webPreferences: {
             nodeIntegration: true
         }
@@ -13,6 +15,7 @@ function createWindow () {
 
     // and load the index.html of the app
     win.loadFile("index.html")
+    // win.removeMenu()
     let server = require("./db/server.js")
 
     // open dev tools

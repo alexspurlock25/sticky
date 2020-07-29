@@ -17,57 +17,29 @@ $(document).ready( function () {
             console.log("Error: Failed to load data.")
         }
     })
-
 })
-
 $("#add-btn-menu").click( function () {
 
-    if ($("#add-form").css("display") === "none") {
-
-      $("#add-btn-menu").text("CANCEL")
-      $("#edit-btn-menu").hide(300)
-
-      $("#wrapper :button").prop("disabled", true)
-      $("#add-form").show(300)
-
-    } else {
-
-        $("#wrapper :button").prop("disabled", false)
-        $("#edit-btn-menu").show(300)
-        $("#add-form").hide(300)
-        $("#add-btn-menu").text("ADD")
-
-    }
+  $("#menu-container").hide(300)
+  $("#add-form").show(300)
 
 })
 
 $("#edit-btn-menu").click( function (e) {
 
-  if ($("tbody td:last-child").css("display") === "none") {
+  $("#menu-container").hide(300)
+  $("tbody td:last-child").show(200)
+  $("thead th:last-child").show(200)
 
-      $("#edit-btn-menu").text("CENCEL")
-      $("table").addClass("table-hover")
-
-      $("#add-btn-menu").hide()
-
-      $("tbody td:last-child").show()
-      $("thead th:last-child").show()
-
-  } else {
-
-      $("#edit-btn-menu").text("EDIT")
-      $("table").removeClass("table-hover")
-
-      $("#add-btn-menu").show()
-
-      $("tbody td:last-child").hide()
-      $("thead th:last-child").hide()
-
-  }
+  $("#edit-btn-row").prop("disabled", false)
+  $("#delete-btn-row").prop("disabled", false)  
 
 })
 
 function edit_row(clicked_row) {
+
+  $("#edit-btn-row").prop("disabled", true)
+  $("#delete-btn-row").prop("disabled", true)
 
     let row_num = $(clicked_row).attr("value")
     let url = $("#row-" + row_num + " #td-url").text()
@@ -75,10 +47,10 @@ function edit_row(clicked_row) {
     let email = $("#row-" + row_num + " #td-email").text()
     let password = $("#row-" + row_num + " #td-password").text()
 
-    $("#edit-form #textbox-url").attr("value", url)
-    $("#edit-form #textbox-username").attr("value", username)
-    $("#edit-form #textbox-email").attr("value", email)
-    $("#edit-form #textbox-password").attr("value", password)
+    $("#edit-txtbx-url").attr("value", url)
+    $("#edit-txtbx-username").attr("value", username)
+    $("#edit-txtbx-email").attr("value", email)
+    $("#edit-txtbx-password").attr("value", password)
 
     $("#edit-form").show()
 
@@ -89,22 +61,17 @@ $("#edit-form").submit( function(e) {
       method: "GET",
       url: "http://localhost:3000/info",
       success: function (response) {
-        check_difference(response, row_num, url, username, email, password)
+        
       },
       error: function(){
           console.log("Error: Failed to load data.")
       }
   })
 
-})
-function check_difference(info, row_num, url, username, email, password) {
-  info.forEach((item) => {
-    if((item.infoid === row_num) && item.url !== url) {
-      console.log("url is different");
-    }
-  })
-}
+  $("#edit-form").trigger("reset")
+  $("#menu-container").show(300)
 
+})
 
 $("#add-form").submit( function (e) {
     e.preventDefault()
@@ -134,8 +101,8 @@ $("#add-form").submit( function (e) {
             console.log("ERROR: Can't add row.")
         }
     })
-    $("#add-form").trigger("reset").css({"display": "none"})
-    $("#add-btn-menu").text("ADD")
+    $("#edit-form").trigger("reset")
+    $("#menu-container").show(300)
 
 })
 
@@ -146,7 +113,7 @@ function add_row(item) {
       + "<td id='td-username'>" + item.username + "</td>"
       + "<td id='td-email'>" + item.email + "</td>"
       + "<td id='td-password'>" + item.password + "</td>"
-      + "<td><button  class='btn btn-outline-primary' value='"+ item.infoid +"' id='edit-btn-row' onclick='edit_row(this)'>EDIT</button><button  class='btn btn-outline-primary' value='"+ item.infoid +"' id='delete-btn-row' onclick='delete_row(this)'>DELETE</button></td>"
+      + "<td><button value='"+ item.infoid +"' id='edit-btn-row' onclick='edit_row(this)'>E</button><button value='"+ item.infoid +"' id='delete-btn-row' onclick='delete_row(this)'>D</button></td>"
       + "</tr>";
 
     $("table").append(row)
@@ -183,14 +150,35 @@ function load_all_info(info) {
             + "<td id='td-username'>" + item.username + "</td>"
             + "<td id='td-email'>" + item.email + "</td>"
             + "<td id='td-password'>" + item.password + "</td>"
-            + "<td><button class='btn btn-outline-primary' value='"+ item.infoid +"' id='edit-btn-row' onclick='edit_row(this)'>EDIT</button><button  class='btn btn-outline-primary' value='"+ item.infoid +"' id='delete-btn-row' onclick='delete_row(this)'>DELETE</button></td>"
+            + "<td><button value='"+ item.infoid +"' id='edit-btn-row' onclick='edit_row(this)'>E</button><button value='"+ item.infoid +"' id='delete-btn-row' onclick='delete_row(this)'>D</button></td>"
             + "</tr>";
 
         $("table").append(row)
     })
 }
 
-$("#edit-cancel-btn").click( function () {
-  $("#edit-form").hide()
-  $("#edit-form").attr("value", "")
+$("#add-form-cancel-btn").click( function () {
+  $("#add-form").hide(300)
+  $("#add-form").trigger("reset")
+  $("#menu-container").show(300)
+  $("#edit-btn-row").prop("disabled", false)
+  $("#delete-btn-row").prop("disabled", false)
+})
+$("#edit-form-cancel-btn").click( function () {
+  $("#edit-form").hide(300)
+  $("#edit-form").trigger("reset")
+
+  // $("#menu-container").show(300)
+  // $("tbody td:last-child").hide(200)
+  // $("thead th:last-child").hide(200)
+  $("#edit-btn-row").prop("disabled", false)
+  $("#delete-btn-row").prop("disabled", false)
+})
+$("#cancel-edit-btn").click( function () {
+  $("#menu-container").show(300)
+  $("#edit-form").hide(300)
+  $("#edit-btn-row").prop("disabled", true)
+  $("#delete-btn-row").prop("disabled", true)  
+  $("tbody td:last-child").hide(200)
+  $("thead th:last-child").hide(200)
 })

@@ -1,60 +1,71 @@
 <!-- Alexander Spurlock -->
 <!-- alexanderspurlock@gmail.com -->
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' http://* 'unsafe-inline';" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' http://* 'unsafe-inline';"
+    />
     <!-- <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"> -->
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/main.css" />
     <title>Sticky</title>
-</head>
-<body>
-
-  <div id="menu-container">
+  </head>
+  <body>
+    <div id="menu-container">
       <button type="button" id="add-btn-menu">ADD</button>
       <button type="button" id="edit-btn-menu">EDIT</button>
-  </div>
-  <div id="form-container">
-    <form id="add-form" method="POST">
-      <input type="text" placeholder="Title *" id="textbox-url" required>
-      <input type="text" placeholder="Username" id="textbox-username">
-      <input type="email" placeholder="Email" id="textbox-email" >
-      <input type="password" placeholder="Password" id="textbox-password" >
-      <button type="submit" class="btn btn-outline-primary">Add Account</button>
-    </form>
-    <form id="edit-form" method="POST">
-      <input type="text" placeholder="Title *" id="textbox-url" required  >
-      <input type="text" placeholder="Username" id="textbox-username" >
-      <input type="email" placeholder="Email" id="textbox-email" >
-      <input type="password" placeholder="Password" id="textbox-password" >
-
-      <button type="submit" class="btn btn-outline-primary">Edit Account</button>
-      <button type="button"  class="btn btn-outline-primary" id="edit-cancel-btn">Cencel Edit</button>
-    </form>
-  </div>
+    </div>
+    <div id="form-container">
+      <form id="add-form" method="POST">
+        <input type="text" placeholder="Title *" id="textbox-url" required />
+        <input type="text" placeholder="Username" id="textbox-username" />
+        <input type="email" placeholder="Email" id="textbox-email" />
+        <input type="password" placeholder="Password" id="textbox-password" />
+        <button type="submit">Add Account</button>
+        <button type="button" id="add-form-cancel-btn">Cencel</button>
+      </form>
+      <form id="edit-form" method="POST">
+        <input type="text" placeholder="Title *" id="edit-txtbx-url" required />
+        <input type="text" placeholder="Username" id="edit-txtbx-username" />
+        <input type="email" placeholder="Email" id="edit-txtbx-email" />
+        <input type="password" placeholder="Password" id="edit-txtbx-password" />
+        <button type="submit">
+          Edit Account
+        </button>
+        <button type="button" id="edit-form-cancel-btn">Cencel</button>
+      </form>
+    </div>
 
     <div id="wrapper">
       <main>
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Title</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Password</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Title</th>
+              <th scope="col">Username</th>
+              <th scope="col">Email</th>
+              <th scope="col">Password</th>
+              <th scope="col">
+                <button type="button" id="cancel-edit-btn">CANCEL</button>
+              </th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
       </main>
     </div>
 
-<script>window.jQuery = window.$ = require('jquery');</script>
-<!-- <script src="bootstrap/js/bootstrap.min.js"></script> -->
-<script src="db/initialize_db.js"></script>
-<script src="js/ajax_buttons.js"></script>
-</body>
+    <script>
+      window.jQuery = window.$ = require("jquery");
+    </script>
+    <!-- <script src="bootstrap/js/bootstrap.min.js"></script> -->
+    <script src="db/initialize_db.js"></script>
+    <script src="js/ajax_buttons.js"></script>
+  </body>
 </html>
