@@ -38,8 +38,8 @@ $("#edit-btn-menu").click( function (e) {
 
 function edit_row(clicked_row) {
 
-  $("#edit-btn-row").prop("disabled", true)
-  $("#delete-btn-row").prop("disabled", true)
+    $("tbody td:last-child").hide(200)
+    $("thead th:last-child").hide(200)
 
     let row_num = $(clicked_row).attr("value")
     let url = $("#row-" + row_num + " #td-url").text()
@@ -56,20 +56,22 @@ function edit_row(clicked_row) {
 
 }
 $("#edit-form").submit( function(e) {
+    e.preventDefault()
 
-  $.ajax({
-      method: "GET",
-      url: "http://localhost:3000/info",
-      success: function (response) {
-        
-      },
-      error: function(){
-          console.log("Error: Failed to load data.")
-      }
-  })
+    $.ajax({
+        method: "GET",
+        url: "http://localhost:3000/info",
+        success: function (response) {
 
-  $("#edit-form").trigger("reset")
-  $("#menu-container").show(300)
+        },
+        error: function(){
+        console.log("Error: Failed to load data.")
+        }
+    })
+
+    $("#edit-form").hide(300)
+    $("#edit-form").trigger("reset")
+    $("#menu-container").show(300)
 
 })
 
@@ -101,7 +103,8 @@ $("#add-form").submit( function (e) {
             console.log("ERROR: Can't add row.")
         }
     })
-    $("#edit-form").trigger("reset")
+    $("#add-form").hide(300)
+    $("#add-form").trigger("reset")
     $("#menu-container").show(300)
 
 })
@@ -158,27 +161,29 @@ function load_all_info(info) {
 }
 
 $("#add-form-cancel-btn").click( function () {
-  $("#add-form").hide(300)
-  $("#add-form").trigger("reset")
-  $("#menu-container").show(300)
-  $("#edit-btn-row").prop("disabled", false)
-  $("#delete-btn-row").prop("disabled", false)
+    $("#add-form").hide(300)
+    $("#add-form").trigger("reset")
+    $("#menu-container").show(300)
+    $("#edit-btn-row").prop("disabled", false)
+    $("#delete-btn-row").prop("disabled", false)
 })
 $("#edit-form-cancel-btn").click( function () {
-  $("#edit-form").hide(300)
-  $("#edit-form").trigger("reset")
+    $("#edit-form").hide(300)
+    $("#edit-form").trigger("reset")
 
-  // $("#menu-container").show(300)
-  // $("tbody td:last-child").hide(200)
-  // $("thead th:last-child").hide(200)
-  $("#edit-btn-row").prop("disabled", false)
-  $("#delete-btn-row").prop("disabled", false)
+    $("tbody td:last-child").show(200)
+    $("thead th:last-child").show(200)
+    $("#edit-btn-row").prop("disabled", false)
+    $("#delete-btn-row").prop("disabled", false)
 })
 $("#cancel-edit-btn").click( function () {
-  $("#menu-container").show(300)
-  $("#edit-form").hide(300)
-  $("#edit-btn-row").prop("disabled", true)
-  $("#delete-btn-row").prop("disabled", true)  
-  $("tbody td:last-child").hide(200)
-  $("thead th:last-child").hide(200)
+    $("#edit-form").hide(300)
+    $("#edit-form").trigger("reset")
+    $("#menu-container").show(300)
+
+    $("#edit-btn-row").prop("disabled", true)
+    $("#delete-btn-row").prop("disabled", true)  
+
+    $("tbody td:last-child").hide(200)
+    $("thead th:last-child").hide(200)
 })

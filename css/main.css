@@ -4,17 +4,23 @@
   box-sizing: border-box;
 }
 #menu-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  margin-bottom: 10px;
   display: flex;
   align-items: center; /* verticall align */
   justify-content: right;  /* horizontally align  */
-  width: 100%;
+  width: 98%;
   height: 50px;
 }
 button {
+  font-family: Candara;
+  font-size: 12pt;
   border: none;
   height: 30px;
   width: 100px;
-  background-color: #ffc0cb;
+  background-color: #FF6F61;
+  border-radius: 5px;
   transition-duration: 500ms;
   margin: 0 9px;
 }
@@ -23,14 +29,22 @@ button:hover {
   cursor: pointer;
 }
 
-
 /* TABLE */
 
 table {
   border-collapse: collapse;
   table-layout: fixed;
-  margin: 0 auto;
+  margin: 10px auto;
+  box-shadow: 0 1px 2px gainsboro, 
+  0 2px 4px gainsboro, 
+  0 4px 8px gainsboro, 
+  0 8px 16px gainsboro,
+  0 16px 32px gainsboro, 
+  0 32px 64px gainsboro;
+  border-radius: 5px;
+  overflow: hidden;
   width: 98%;
+  max-width: 1000px;
 }
 #edit-btn-row, #delete-btn-row {
   margin: 0 5px;
@@ -38,18 +52,27 @@ table {
   height: 100%;
   width: 50px;
 }
+tbody tr {
+  border-bottom: 1px solid gainsboro;
+}
+tbody tr:nth-of-type(even) {
+  background-color: ghostwhite;
+}
+tbody tr:last-of-type {
+  border-bottom: 3px solid #FF6F61;
+}
 thead tr {
   box-shadow: 0 4px 10px 1px gainsboro;
 }
 thead tr:last-of-type {
   box-shadow: none;
-  border: none;
 }
 table thead {
-  background-color: #ffc0cb;
+  background-color: #FF6F61;
+  font-family: Candara;
+  font-size: 13pt;
 }
-th,
-td {
+th,td {
   padding: 15px;
   text-align: left;
 }
@@ -61,11 +84,6 @@ th:last-child {
 td:last-child{
   display: flex;
   justify-content: center;
-  box-shadow: none;
-}
-thead tr,
-th td:last-child {
-  box-shadow: none;
 }
 td {
   height: 70px;
@@ -81,7 +99,12 @@ td {
 }
 #form-container form {
   background-color: white;
-  box-shadow: 0 0 10px 5px gainsboro;
+  box-shadow: 0 1px 2px gainsboro, 
+  0 2px 4px gainsboro, 
+  0 4px 8px gainsboro, 
+  0 8px 16px gainsboro,
+  0 16px 32px gainsboro, 
+  0 32px 64px gainsboro;
   height: 370px;
   width: 400px;
   left: 50%;
@@ -92,6 +115,7 @@ td {
   position: absolute;
 }
 #form-container input {
+  border-radius: 5px;
   border: 1px solid gainsboro;
   font-size: 15pt;
   padding-left: 5px;
@@ -100,5 +124,10 @@ td {
   height: 40px;
   margin: 10px auto;
 }
-
+#form-container button {
+  display: block;
+  width: 300px;
+  height: 40px;
+  margin: 10px auto;
+}
 /* END FORM */

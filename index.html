@@ -4,15 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="script-src 'self' http://* 'unsafe-inline';"
-    />
-    <!-- <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' http://* 'unsafe-inline';" />
     <link rel="stylesheet" href="css/main.css" />
     <title>Sticky</title>
   </head>
@@ -28,7 +21,7 @@
         <input type="email" placeholder="Email" id="textbox-email" />
         <input type="password" placeholder="Password" id="textbox-password" />
         <button type="submit">Add Account</button>
-        <button type="button" id="add-form-cancel-btn">Cencel</button>
+        <button type="button" id="add-form-cancel-btn">Cancel</button>
       </form>
       <form id="edit-form" method="POST">
         <input type="text" placeholder="Title *" id="edit-txtbx-url" required />
@@ -61,10 +54,7 @@
       </main>
     </div>
 
-    <script>
-      window.jQuery = window.$ = require("jquery");
-    </script>
-    <!-- <script src="bootstrap/js/bootstrap.min.js"></script> -->
+    <script>window.jQuery = window.$ = require("jquery");</script>
     <script src="db/initialize_db.js"></script>
     <script src="js/ajax_buttons.js"></script>
   </body>
