@@ -55,12 +55,24 @@ function edit_row(clicked_row) {
     $("#edit-form").show()
 
 }
+
 $("#edit-form").submit( function(e) {
     e.preventDefault()
 
+    let url = $("#edit-txtbx-url").val()
+    let username = $("#edit-txtbx-username").val()
+    let email = $("#edit-txtbx-email").val()
+    let password = $("#edit-txtbx-password").val()
+
     $.ajax({
         method: "GET",
-        url: "http://localhost:3000/info",
+        url: "http://localhost:3000/edit",
+        data: {
+            url: url,
+            username: username,
+            email: email,
+            password: password
+        },
         success: function (response) {
 
         },
@@ -153,7 +165,7 @@ function load_all_info(info) {
             + "<td id='td-username'>" + item.username + "</td>"
             + "<td id='td-email'>" + item.email + "</td>"
             + "<td id='td-password'>" + item.password + "</td>"
-            + "<td><button value='"+ item.infoid +"' id='edit-btn-row' onclick='edit_row(this)'>E</button><button value='"+ item.infoid +"' id='delete-btn-row' onclick='delete_row(this)'>D</button></td>"
+            + "<td><button value='"+ item.infoid +"' id='edit-btn-row' onclick='edit_row(this)'><img src='https://img.icons8.com/windows/32/000000/edit.png'/></button><button value='"+ item.infoid +"' id='delete-btn-row' onclick='delete_row(this)'><img src='https://img.icons8.com/windows/32/000000/trash.png'/></button></td>"
             + "</tr>";
 
         $("table").append(row)

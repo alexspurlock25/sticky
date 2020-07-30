@@ -35,6 +35,15 @@ app.post("/delete", function (req, res) {
     })
 })
 
+app.post("/edit", function(req, res) {
+    console.log(req.body.url)
+    // user_info.editInfo(req.body.infoid).then( function(response) {
+    //     res.json( {
+    //         infoid: req.body.url
+    //     })
+    // } )
+})
+
 app.listen(3000, function () {
 
     console.log("PORT OPEN: 3000");

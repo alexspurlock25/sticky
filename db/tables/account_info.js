@@ -70,6 +70,35 @@ module.exports.removeInfo = function (row_to_delete) {
         db.close();
     })
 
+}
 
+module.exports.editInfo = function (row_to_edit) {
+    console.log("SERVER SAYS: " + row_to_edit)
+    let db = new sqlite3.Database(path.join (__dirname, "../user_database.sql"))
+    return new Promise( function (resolve, reject) {
+        
+// UPDATE employees
+// SET city = 'Toronto',
+// state = 'ON',
+// postalcode = 'M5P 2N7'
+// WHERE
+// employeeid = 4;
 
+        // db.serialize(function() {
+
+        //     db.run("DELETE FROM tUserData WHERE infoid=(?)", [row_to_delete], function (err, rows) {
+
+        //         if(!err) {
+        //             resolve(rows)
+        //         } else {
+        //             console.log(err)
+        //             reject(err)
+        //         }
+
+        //     });
+
+        // });
+        // db.close();
+
+    })
 }

@@ -9,26 +9,37 @@
   margin-bottom: 10px;
   display: flex;
   align-items: center; /* verticall align */
-  justify-content: right;  /* horizontally align  */
-  width: 98%;
+  justify-content: flex-end;  /* horizontally align  */
+  width: 97%;
   height: 50px;
 }
+#menu-container button {
+  background-color: white;
+  margin: 1px;
+  padding: 0;
+  height: 40px;
+  width: 40px;
+}
 button {
+  color: white;
   font-family: Candara;
   font-size: 12pt;
   border: none;
   height: 30px;
   width: 100px;
-  background-color: #FF6F61;
-  border-radius: 5px;
-  transition-duration: 500ms;
+  background-color: #20B2AA;
+  transition-duration: 400ms;
   margin: 0 9px;
 }
 button:hover {
-  box-shadow: 0 4px 10px 2px gainsboro;
+  border-bottom: 1px solid #20B2AA;
   cursor: pointer;
 }
-
+#cancel-edit-btn:hover {
+  border: 2px solid black;
+  color: black;
+  background-color: white;
+}
 /* TABLE */
 
 table {
@@ -47,30 +58,29 @@ table {
   max-width: 1000px;
 }
 #edit-btn-row, #delete-btn-row {
+  background-color: white;
   margin: 0 5px;
   display: inline-block;
   height: 100%;
   width: 50px;
 }
 tbody tr {
-  border-bottom: 1px solid gainsboro;
-}
-tbody tr:nth-of-type(even) {
-  background-color: ghostwhite;
+  font-size: 14pt;
 }
 tbody tr:last-of-type {
-  border-bottom: 3px solid #FF6F61;
-}
-thead tr {
-  box-shadow: 0 4px 10px 1px gainsboro;
+  border-bottom: 3px solid #F7CAC9;
 }
 thead tr:last-of-type {
   box-shadow: none;
 }
 table thead {
-  background-color: #FF6F61;
+  background-color: #20B2AA;
+  color: white;
   font-family: Candara;
-  font-size: 13pt;
+  font-size: 14pt;
+}
+tbody tr {
+  border-bottom: 1px solid gainsboro;
 }
 th,td {
   padding: 15px;
@@ -87,6 +97,9 @@ td:last-child{
 }
 td {
   height: 70px;
+}
+#cancel-edit-btn {
+  border-radius: 3px;
 }
 
 
@@ -124,10 +137,19 @@ td {
   height: 40px;
   margin: 10px auto;
 }
+#form-container input:focus{
+  border: 1px solid #20B2AA;
+}
 #form-container button {
   display: block;
   width: 300px;
   height: 40px;
   margin: 10px auto;
+  font-size: 14pt;
+}
+#form-container button:hover {
+  border: 2px solid black;
+  color: black;
+  background-color: white;
 }
 /* END FORM */
