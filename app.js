@@ -19,7 +19,7 @@ function createWindow () {
     let server = require("./db/server.js")
 
     // open dev tools
-    // win.webContents.openDevTools()
+    win.webContents.openDevTools()
 
 }
 

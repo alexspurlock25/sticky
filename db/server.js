@@ -7,19 +7,21 @@ app.use(body_parser.urlencoded({extended: true }))
 
 app.get("/info", function (req, res) {
     user_info.getInfo().then( function (response) {
-
         res.json(response)
-
     }).catch( function () {
 
     })
 })
 
+app.get("/get_one_row", function(req, res) {
+    user_info.getRow(req.query.infoid).then( function(response) {
+        res.json(response)
+    })
+})
+
 app.post("/add", function (req, res) {
-    user_info.addInfo(req.body).then ( function () {
-
-      res.json(req.body)
-
+    user_info.addInfo(req.body).then( function(response) {
+      res.json(response) // <------------------ bug
     }).catch( function () {
 
     })

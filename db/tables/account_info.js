@@ -1,52 +1,73 @@
 let sqlite3 = require("sqlite3").verbose()
 let path = require("path")
-const { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } = require("constants")
 
-module.exports.getInfo = function (callback) {
+module.exports.getInfo = function () {
 let db = new sqlite3.Database(path.join (__dirname, "../user_database.sql"))
 
-return new Promise( function (resolve, reject) {
+    return new Promise( function (resolve, reject) {
 
-    db.serialize( function () {
+        db.serialize( function () {
 
-        db.all("SELECT infoid, url, username, email, password FROM tUserData;", function (err, rows) {
+            db.all("SELECT infoid, url, username, email, password FROM tUserData;", function (err, rows) {
 
-            if (!err) {
-                resolve(rows)
-            } else {
-                reject(err)
-            }
+                if (!err) {
+                    resolve(rows)
+                } else {
+                    reject(err)
+                }
+
+            })
 
         })
+        db.close()
 
     })
-    db.close()
-
-})
 
 }
 
+module.exports.getRow = function(row_to_edit) {
+    let db = new sqlite3.Database(path.join (__dirname, "../user_database.sql"))
+    return new Promise( function (resolve, reject) {
+
+        db.serialize( function () {
+
+            db.all("SELECT url, username, email, password FROM tUserData WHERE infoid=(?);",[row_to_edit], function (err, rows) {
+
+                if (!err) {
+                    resolve(rows)
+                } else {
+                    reject(err)
+                }
+
+            })
+
+        })
+        db.close()
+
+    })
+
+}
 module.exports.addInfo = function (data) {
 let db = new sqlite3.Database(path.join (__dirname, "../user_database.sql"))
 
-return new Promise ( function (resolve, reject) {
+    return new Promise( function (resolve, reject) {
 
-    db.serialize( function () {
+        db.serialize( function () {
 
-        db.run("INSERT INTO tUserData (url, username, email, password) VALUES (?, ?, ?, ?);", [data.url, data.username, data.email, data.password], function (err, rows) {
+            db.run("INSERT INTO tUserData (url, username, email, password) VALUES (?, ?, ?, ?);", [data.url, data.username, data.email, data.password], function (err, rows) {
+                
+                if (!err) {
+                    resolve(rows)
+                } else {
+                    reject(err)
+                }
 
-            if (!err) {
-                resolve(rows)
-            } else {
-                console.log(err)
-                reject(err)
-            }
-        });
+            })
+
+        })
+        db.close()
 
     })
-    db.close()
-
-})
 
 }
 
