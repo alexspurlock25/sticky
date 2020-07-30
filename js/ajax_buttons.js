@@ -1,5 +1,5 @@
 window.$ = require("jquery")
-
+let row_id;
 $(document).ready( function () {
 
   $("#add-form").hide()
@@ -24,7 +24,6 @@ $("#add-btn-menu").click( function () {
   $("#add-form").show(300)
 
 })
-
 $("#edit-btn-menu").click( function (e) {
 
   $("#menu-container").hide(300)
@@ -35,13 +34,14 @@ $("#edit-btn-menu").click( function (e) {
   $("#delete-btn-row").prop("disabled", false)  
 
 })
-
 function edit_row(clicked_row) {
 
     $("tbody td:last-child").hide(200)
     $("thead th:last-child").hide(200)
 
     let row_num = $(clicked_row).attr("value")
+    row_id = row_num;
+
     let url = $("#row-" + row_num + " #td-url").text()
     let username = $("#row-" + row_num + " #td-username").text()
     let email = $("#row-" + row_num + " #td-email").text()
@@ -55,7 +55,6 @@ function edit_row(clicked_row) {
     $("#edit-form").show()
 
 }
-
 $("#edit-form").submit( function(e) {
     e.preventDefault()
 
@@ -65,27 +64,36 @@ $("#edit-form").submit( function(e) {
     let password = $("#edit-txtbx-password").val()
 
     $.ajax({
-        method: "GET",
+        method: "POST",
         url: "http://localhost:3000/edit",
         data: {
+            infoid: row_id,
             url: url,
             username: username,
             email: email,
             password: password
         },
         success: function (response) {
-
+            update_row(response)
+            console.log("Row updated.")
         },
         error: function(){
-        console.log("Error: Failed to load data.")
+            console.log("Error: Failed to load data.")
         }
     })
+    
 
     $("#edit-form").hide(300)
     $("#edit-form").trigger("reset")
     $("#menu-container").show(300)
 
 })
+function update_row(info) {
+    $("#row-" + info.infoid + " #td-url").text(info.url)
+    $("#row-" + info.infoid + " #td-username").text(info.username)
+    $("#row-" + info.infoid + " #td-email").text(info.email)
+    $("#row-" + info.infoid + " #td-password").text(info.password)
+}
 
 $("#add-form").submit( function (e) {
     e.preventDefault()
@@ -120,58 +128,63 @@ $("#add-form").submit( function (e) {
     $("#menu-container").show(300)
 
 })
-
 function add_row(item) {
 
-  let row = "<tr scope='row' id='row-" + item.infoid + "'>"
-      + "<td id='td-url'>" + item.url + "</td>"
-      + "<td id='td-username'>" + item.username + "</td>"
-      + "<td id='td-email'>" + item.email + "</td>"
-      + "<td id='td-password'>" + item.password + "</td>"
-      + "<td><button value='"+ item.infoid +"' id='edit-btn-row' onclick='edit_row(this)'>E</button><button value='"+ item.infoid +"' id='delete-btn-row' onclick='delete_row(this)'>D</button></td>"
-      + "</tr>";
+    let row = "<tr scope='row' id='row-" + item.infoid + "'>"
+    + "<td id='td-url'>" + item.url + "</td>"
+    + "<td id='td-username'>" + item.username + "</td>"
+    + "<td id='td-email'>" + item.email + "</td>"
+    + "<td id='td-password'>" + item.password + "</td>"
+    + "<td><button value='"+ item.infoid +"' id='edit-btn-row' onclick='edit_row(this)'><img src='https://img.icons8.com/windows/32/000000/edit.png'/></button><button value='"+ item.infoid +"' id='delete-btn-row' onclick='delete_row(this)'><img src='https://img.icons8.com/windows/32/000000/trash.png'/></button></td>"
+    + "</tr>";
 
     $("table").append(row)
     $("#edit-btn-menu").show()
 
 }
-
 function delete_row(clicked_button){
-    let button_value = $(clicked_button).attr("value")
+    if($('table tbody tr').length === 0) {
+        $("table").hide(300)
+    } else {
+        let button_value = $(clicked_button).attr("value")
 
-    $.ajax({
-        method: "POST",
-        cache: false,
-        url: "http://localhost:3000/delete",
-        data: {
-            infoid: button_value
-        },
-        success: function(response) {
-            $("#row-" + response.infoid).remove()
-            console.log("Row Deleted.")
-        },
-        error: function() {
-            console.log("ERROR: Can't delete row.")
-        }
-    })
+        $.ajax({
+            method: "POST",
+            cache: false,
+            url: "http://localhost:3000/delete",
+            data: {
+                infoid: button_value
+            },
+            success: function(response) {
+                $("#row-" + response.infoid).remove()
+                console.log("Row Deleted.")
+            },
+            error: function() {
+                console.log("ERROR: Can't delete row.")
+            }
+        })
+        
+    }
 }
-
 function load_all_info(info) {
 
-    info.forEach( function (item) {
+    if (info.length != 0) {
+        info.forEach( function (item) {
 
-        let row = "<tr scope='row' id='row-" + item.infoid + "'>"
-            + "<td id='td-url'>" + item.url + "</td>"
-            + "<td id='td-username'>" + item.username + "</td>"
-            + "<td id='td-email'>" + item.email + "</td>"
-            + "<td id='td-password'>" + item.password + "</td>"
-            + "<td><button value='"+ item.infoid +"' id='edit-btn-row' onclick='edit_row(this)'><img src='https://img.icons8.com/windows/32/000000/edit.png'/></button><button value='"+ item.infoid +"' id='delete-btn-row' onclick='delete_row(this)'><img src='https://img.icons8.com/windows/32/000000/trash.png'/></button></td>"
-            + "</tr>";
-
-        $("table").append(row)
-    })
+            let row = "<tr scope='row' id='row-" + item.infoid + "'>"
+                + "<td id='td-url'>" + item.url + "</td>"
+                + "<td id='td-username'>" + item.username + "</td>"
+                + "<td id='td-email'>" + item.email + "</td>"
+                + "<td id='td-password'>" + item.password + "</td>"
+                + "<td><button value='"+ item.infoid +"' id='edit-btn-row' onclick='edit_row(this)'><img src='https://img.icons8.com/windows/32/000000/edit.png'/></button><button value='"+ item.infoid +"' id='delete-btn-row' onclick='delete_row(this)'><img src='https://img.icons8.com/windows/32/000000/trash.png'/></button></td>"
+                + "</tr>";
+    
+            $("table").append(row)
+        })   
+    } else {
+        $("table").hide()
+    }
 }
-
 $("#add-form-cancel-btn").click( function () {
     $("#add-form").hide(300)
     $("#add-form").trigger("reset")

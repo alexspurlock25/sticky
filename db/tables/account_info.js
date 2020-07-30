@@ -1,5 +1,6 @@
 let sqlite3 = require("sqlite3").verbose()
 let path = require("path")
+const { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } = require("constants")
 
 module.exports.getInfo = function (callback) {
 let db = new sqlite3.Database(path.join (__dirname, "../user_database.sql"))
@@ -8,7 +9,7 @@ return new Promise( function (resolve, reject) {
 
     db.serialize( function () {
 
-        db.all("SELECT infoid, url, username, email, password FROM tUserData", function (err, rows) {
+        db.all("SELECT infoid, url, username, email, password FROM tUserData;", function (err, rows) {
 
             if (!err) {
                 resolve(rows)
@@ -72,33 +73,31 @@ module.exports.removeInfo = function (row_to_delete) {
 
 }
 
-module.exports.editInfo = function (row_to_edit) {
-    console.log("SERVER SAYS: " + row_to_edit)
+module.exports.editInfo = function (data) {
     let db = new sqlite3.Database(path.join (__dirname, "../user_database.sql"))
     return new Promise( function (resolve, reject) {
-        
-// UPDATE employees
-// SET city = 'Toronto',
-// state = 'ON',
-// postalcode = 'M5P 2N7'
-// WHERE
-// employeeid = 4;
 
-        // db.serialize(function() {
+        let infoid = data.infoid
+        let url = data.url
+        let username = data.username
+        let email = data.email
+        let password = data.password
 
-        //     db.run("DELETE FROM tUserData WHERE infoid=(?)", [row_to_delete], function (err, rows) {
+        db.serialize(function() {
 
-        //         if(!err) {
-        //             resolve(rows)
-        //         } else {
-        //             console.log(err)
-        //             reject(err)
-        //         }
+            db.run("UPDATE tUserData SET url='"+ url +"', username='"+ username +"', email='"+ email +"', password='"+ password +"' WHERE infoid=(?);", [infoid], function (err, rows) {
 
-        //     });
+                if(!err) {
+                    resolve(rows)
+                } else {
+                    console.log(err)
+                    reject(err)
+                }
 
-        // });
-        // db.close();
+            });
+
+        });
+        db.close();
 
     })
 }

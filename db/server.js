@@ -36,12 +36,9 @@ app.post("/delete", function (req, res) {
 })
 
 app.post("/edit", function(req, res) {
-    console.log(req.body.url)
-    // user_info.editInfo(req.body.infoid).then( function(response) {
-    //     res.json( {
-    //         infoid: req.body.url
-    //     })
-    // } )
+    user_info.editInfo(req.body).then( function(response) {
+        res.json(req.body)
+    } )
 })
 
 app.listen(3000, function () {
