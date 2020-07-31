@@ -9,7 +9,8 @@ db.serialize(function(err) {
     + "url TEXT NOT NULL,"
     + "username TEXT, "
     + "email TEXT, "
-    + "password TEXT)"
+    + "password TEXT, "
+    + "date DATETIME DEFAULT current_timestamp"
   );
 
     if (err) {
