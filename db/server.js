@@ -6,8 +6,8 @@ let user_info = require("./tables/account_info")
 app.use(body_parser.urlencoded({extended: true }))
 
 app.get("/info", function (req, res) {
-    user_info.getInfo().then( function (response) {
-        res.json(response)
+    user_info.getInfo().then( function (all_rows) {
+        res.json(all_rows)
     }).catch( function () {
 
     })
@@ -20,15 +20,19 @@ app.get("/get_one_row", function(req, res) {
 })
 
 app.post("/add", function (req, res) {
-    user_info.addInfo(req.body).then( function(response) {
-      res.json(response) // <------------------ bug
-    }).catch( function () {
+    user_info.addInfo(req.body).then( function(row_id) {
+        res.json({
+            data: req.body,
+            row_id: row_id
+        })
+    }).catch(function () {
 
     })
 })
 
 app.post("/delete", function (req, res) {
-    user_info.removeInfo(req.body.infoid).then( function (response) {
+    user_info.removeInfo(req.body.infoid).then( function (row) {
+        console.log(row)
         res.json( {
             infoid: req.body.infoid
         } )

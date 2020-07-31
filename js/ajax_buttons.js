@@ -1,32 +1,17 @@
 window.$ = require("jquery")
 let row_id;
+
 $(document).ready( function () {
 
-  $("#add-form").hide()
-  $("#edit-form").hide()
+    $("#add-form").hide()
+    $("#edit-form").hide()
+    $("#filters").hide()
 
     $.ajax({
         method: "GET",
         url: "http://localhost:3000/info",
         success: function (response) {
-            
-            if (response.length != 0) {
-                response.forEach( function (item) {
-        
-                    let row = "<tr scope='row' id='row-" + item.infoid + "'>"
-                        + "<td id='td-url'>" + item.url + "</td>"
-                        + "<td id='td-username'>" + item.username + "</td>"
-                        + "<td id='td-email'>" + item.email + "</td>"
-                        + "<td id='td-password'>" + item.password + "</td>"
-                        + "<td><button value='"+ item.infoid +"' id='edit-btn-row' onclick='edit_row(this)'><img src='https://img.icons8.com/windows/32/000000/edit.png'/></button><button value='"+ item.infoid +"' id='delete-btn-row' onclick='delete_row(this)'><img src='https://img.icons8.com/windows/32/000000/trash.png'/></button></td>"
-                        + "</tr>";
-            
-                    $("table tbody").append(row)
-                })   
-            } else {
-                $("table").hide()
-            }
-
+            loadAllRows(response)
             $("tbody td:last-child").hide()
             $("thead th:last-child").hide()
         },
@@ -35,22 +20,33 @@ $(document).ready( function () {
         }
     })
 })
+
 $("#add-btn-menu").click( function () {
 
-  $("#menu-container").hide(300)
-  $("#add-form").show(300)
+    $("#menu-container").hide(300)
+    $("table").hide(300)
+    $("#add-form").show(300)
+    $("#filters").hide(300)
 
 })
-$("#edit-btn-menu").click( function (e) {
 
-  $("#menu-container").hide(300)
-  $("tbody td:last-child").show(200)
-  $("thead th:last-child").show(200)
+$("#edit-btn-menu").click( function () {
 
-  $("#edit-btn-row").prop("disabled", false)
-  $("#delete-btn-row").prop("disabled", false)  
+    $("#menu-container").hide(300)
+    $("tbody td:last-child").show(200)
+    $("thead th:last-child").show(200)
+    $("#filters").hide(300)
+
+
+    $("#edit-btn-row").prop("disabled", false)
+    $("#delete-btn-row").prop("disabled", false)
 
 })
+
+$("#filter-btn-menu").click( function () {
+    $("#filters").toggle(300)
+})
+// EDIT FORM SUBMIT function that interacts with database using ajax
 $("#edit-form").submit( function(e) {
     e.preventDefault()
 
@@ -82,13 +78,14 @@ $("#edit-form").submit( function(e) {
             console.log("Error: Failed to load data.")
         }
     })
-    
-    $("#edit-form").hide(300)
-    $("#edit-form").trigger("reset")
+
+    $("#edit-form").hide(300).trigger("reset")
+    $("table").show(300)
     $("#menu-container").show(300)
 
 })
 
+// ADD FORM SUBMIT function that interacts with database using ajax
 $("#add-form").submit( function (e) {
     e.preventDefault()
 
@@ -108,17 +105,8 @@ $("#add-form").submit( function (e) {
             password: password
         },
         success: function(response) {
-            
-            let row = "<tr scope='row' id='row-" + response.infoid + "'>"
-            + "<td id='td-url'>" + response.url + "</td>"
-            + "<td id='td-username'>" + response.username + "</td>"
-            + "<td id='td-email'>" + response.email + "</td>"
-            + "<td id='td-password'>" + response.password + "</td>"
-            + "<td><button value='"+ response.infoid +"' id='edit-btn-row' onclick='edit_row(this)'><img src='https://img.icons8.com/windows/32/000000/edit.png'/></button><button value='"+ response.infoid +"' id='delete-btn-row' onclick='delete_row(this)'><img src='https://img.icons8.com/windows/32/000000/trash.png'/></button></td>"
-            + "</tr>";
-        
-            $("table tbody").append(row)
-            $("#edit-btn-menu").show()
+
+            addRow(response)
 
             $("tbody td:last-child").hide()
             $("thead th:last-child").hide()
@@ -129,41 +117,103 @@ $("#add-form").submit( function (e) {
             console.log("ERROR: Can't add row.")
         }
     })
-    $("#add-form").hide(300)
-    $("#add-form").trigger("reset")
+    $("#add-form").hide(300).trigger("reset")
+    $("table").show(300)
     $("#menu-container").show(300)
 
 })
-function edit_row(clicked_row) {
+
+// CANCEL ADD FORM BUTTON that cancels changes and exits the form.
+$("#add-form-cancel-btn").click( function () {
+    $("#add-form").hide(300).trigger("reset")
+    $("table").show(300)
+
+    $("#menu-container").show(300)
+    $("#edit-btn-row").prop("disabled", false)
+    $("#delete-btn-row").prop("disabled", false)
+})
+
+// CANCEL EDIT FORM BUTTON that cancels changes and exits the form.
+$("#edit-form-cancel-btn").click( function () {
+    $("#edit-form").hide(300).trigger("reset")
+    $("table").show(300)
+
+    $("tbody td:last-child").show(200)
+    $("thead th:last-child").show(200)
+    $("#edit-btn-row").prop("disabled", false)
+    $("#delete-btn-row").prop("disabled", false)
+})
+
+// CANCEL EDIT BUTTON that is inside the table head.
+$("#cancel-edit-btn").click( function () {
+    $("#edit-form").hide(300).trigger("reset")
+
+    $("#menu-container").show(300)
+
+    $("#edit-btn-row").prop("disabled", true)
+    $("#delete-btn-row").prop("disabled", true)  
+
+    $("tbody td:last-child").hide(200)
+    $("thead th:last-child").hide(200)
+})
+
+// LOAD ALL ROWS from database after successful ajax call
+function loadAllRows(rows) {
+
+    rows.forEach( (row) => {
+
+        let htmlTableRow = "<tr id='row-" + row.infoid + "'>"
+            + "<td id='td-url'>" + row.url + "</td>"
+            + "<td id='td-username'>" + row.username + "</td>"
+            + "<td id='td-email'>" + row.email + "</td>"
+            + "<td id='td-password'>" + row.password + "</td>"
+            + "<td><button value='"+ row.infoid +"' id='edit-btn-row' onclick='editRow(this)'><img alt='Edit' src='https://img.icons8.com/windows/32/000000/edit.png'/></button><button value='"+ row.infoid +"' id='delete-btn-row' onclick='delete_row(this)'><img alt='Delete' src='https://img.icons8.com/windows/32/000000/trash.png'/></button></td>"
+            + "</tr>";
+
+        $("table tbody").append(htmlTableRow)
+    })
+
+}
+
+// ADD ROW to database table after successful ajax call
+function addRow(row) {
+
+    let htmlTableRow = "<tr id='row-" + row.row_id + "'>"
+        + "<td id='td-url'>" + row.data.url + "</td>"
+        + "<td id='td-username'>" + row.data.username + "</td>"
+        + "<td id='td-email'>" + row.data.email + "</td>"
+        + "<td id='td-password'>" + row.data.password + "</td>"
+        + "<td><button value='"+ row.row_id +"' id='edit-btn-row' onclick='editRow(this)'><img alt='Edit' src='https://img.icons8.com/windows/32/000000/edit.png'/></button><button value='"+ row.row_id +"' id='delete-btn-row' onclick='delete_row(this)'><img alt='Delete' src='https://img.icons8.com/windows/32/000000/trash.png'/></button></td>"
+        + "</tr>";
+
+    $("table tbody").append(htmlTableRow)
+
+}
+
+// EDIT ROW function that simply takes fills out #edit-form when button is clicked inside that row
+function editRow(clicked_row) {
 
     $("tbody td:last-child").hide(200)
     $("thead th:last-child").hide(200)
 
     let row_num = $(clicked_row).attr("value")
-    row_id = row_num;
-    
-    $.ajax({
-        method: "GET",
-        url: "http://localhost:3000/get_one_row",
-        data: {
-            infoid: row_num
-        },
-        success: function (response) {
-            console.log(response[0].url) 
-            $("#edit-txtbx-url").attr("value", response[0].url)
-            $("#edit-txtbx-username").attr("value", response[0].username)
-            $("#edit-txtbx-email").attr("value", response[0].email)
-            $("#edit-txtbx-password").attr("value", response[0].password)
-            console.log("Got One Row.")
-        },
-        error: function(){
-            console.log("Error: Failed to get one row.")
-        }
-    })
+    row_id = row_num
+    let url = $("#row-" + row_num + " #td-url").text()
+    let username = $("#row-" + row_num + " #td-username").text()
+    let email = $("#row-" + row_num + " #td-email").text()
+    let password = $("#row-" + row_num + " #td-password").text()
 
+    $("#edit-txtbx-url").attr("value", url)
+    $("#edit-txtbx-username").attr("value", username)
+    $("#edit-txtbx-email").attr("value", email)
+    $("#edit-txtbx-password").attr("value", password)
+
+    $("table").hide(300)
     $("#edit-form").show()
 
 }
+
+// DELETE ROW function that deletes a row from database using ajax
 function delete_row(clicked_button){
 
     let button_value = $(clicked_button).attr("value")
@@ -185,30 +235,3 @@ function delete_row(clicked_button){
     })
 
 }
-$("#add-form-cancel-btn").click( function () {
-    $("#add-form").hide(300)
-    $("#add-form").trigger("reset")
-    $("#menu-container").show(300)
-    $("#edit-btn-row").prop("disabled", false)
-    $("#delete-btn-row").prop("disabled", false)
-})
-$("#edit-form-cancel-btn").click( function () {
-    $("#edit-form").hide(300)
-    $("#edit-form").trigger("reset")
-
-    $("tbody td:last-child").show(200)
-    $("thead th:last-child").show(200)
-    $("#edit-btn-row").prop("disabled", false)
-    $("#delete-btn-row").prop("disabled", false)
-})
-$("#cancel-edit-btn").click( function () {
-    $("#edit-form").hide(300)
-    $("#edit-form").trigger("reset")
-    $("#menu-container").show(300)
-
-    $("#edit-btn-row").prop("disabled", true)
-    $("#delete-btn-row").prop("disabled", true)  
-
-    $("tbody td:last-child").hide(200)
-    $("thead th:last-child").hide(200)
-})

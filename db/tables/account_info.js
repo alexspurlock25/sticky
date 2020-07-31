@@ -47,6 +47,7 @@ module.exports.getRow = function(row_to_edit) {
     })
 
 }
+
 module.exports.addInfo = function (data) {
 let db = new sqlite3.Database(path.join (__dirname, "../user_database.sql"))
 
@@ -55,9 +56,9 @@ let db = new sqlite3.Database(path.join (__dirname, "../user_database.sql"))
         db.serialize( function () {
 
             db.run("INSERT INTO tUserData (url, username, email, password) VALUES (?, ?, ?, ?);", [data.url, data.username, data.email, data.password], function (err, rows) {
-                
+
                 if (!err) {
-                    resolve(rows)
+                    resolve(this.lastID)
                 } else {
                     reject(err)
                 }
@@ -71,13 +72,13 @@ let db = new sqlite3.Database(path.join (__dirname, "../user_database.sql"))
 
 }
 
-module.exports.removeInfo = function (row_to_delete) {
+module.exports.removeInfo = function (row_id) {
     let db = new sqlite3.Database(path.join (__dirname, "../user_database.sql"))
     return new Promise ( function (resolve, reject) {
 
         db.serialize(function() {
 
-            db.run("DELETE FROM tUserData WHERE infoid=(?)", [row_to_delete], function (err, rows) {
+            db.run("DELETE FROM tUserData WHERE infoid=(?)", [row_id], function (err, rows) {
 
                 if(!err) {
                     resolve(rows)

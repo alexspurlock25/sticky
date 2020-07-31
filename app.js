@@ -4,9 +4,9 @@ function createWindow () {
     // create the browser window
     const win = new BrowserWindow({
 
-        width: 900,
+        width: 1000,
         minWidth: 550,
-        height: 800,
+        height: 1200,
         minHeight: 550,
         webPreferences: {
             nodeIntegration: true
@@ -19,7 +19,7 @@ function createWindow () {
     let server = require("./db/server.js")
 
     // open dev tools
-    win.webContents.openDevTools()
+    // win.webContents.openDevTools()
 
 }
 

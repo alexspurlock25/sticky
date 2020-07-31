@@ -3,16 +3,48 @@
   padding: 0;
   box-sizing: border-box;
 }
+*:focus {
+  outline: none;
+}
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance:none;
+}
 #menu-container {
   max-width: 1000px;
-  margin: 0 auto;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center; /* verticall align */
-  justify-content: flex-end;  /* horizontally align  */
+  margin: 0 auto 10px;
   width: 97%;
   height: 50px;
 }
+#left-side-menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 40%;
+  float: left;
+  height: 100%;
+}
+#search-bar {
+  background: url("../images/search_icon.png") no-repeat;
+  width: 300px;
+  font-size: 16pt;
+  margin-left: 5px;
+  padding: 5px 5px 5px 35px;
+  border: none;
+  border-bottom: 1px solid black;
+  transition-duration: 300ms;
+}
+#right-side-menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 40%;
+  height: 100%;
+  float: right;
+}
+
 #menu-container button {
   background-color: white;
   margin: 1px;
@@ -21,22 +53,22 @@
   width: 40px;
 }
 button {
+  background-color: #1C2833;
   color: white;
-  font-family: Candara;
-  font-size: 12pt;
+  font-family: Candara, serif;
+  font-size: 13pt;
   border: none;
   height: 30px;
   width: 100px;
-  background-color: #20B2AA;
   transition-duration: 400ms;
   margin: 0 9px;
 }
 button:hover {
-  border-bottom: 1px solid #20B2AA;
+  border-bottom: 1px solid #1C2833;
   cursor: pointer;
 }
 #cancel-edit-btn:hover {
-  border: 2px solid black;
+  border-bottom: 2px solid black;
   color: black;
   background-color: white;
 }
@@ -46,11 +78,11 @@ table {
   border-collapse: collapse;
   table-layout: fixed;
   margin: 10px auto;
-  box-shadow: 0 1px 2px gainsboro, 
-  0 2px 4px gainsboro, 
-  0 4px 8px gainsboro, 
+  box-shadow: 0 1px 2px gainsboro,
+  0 2px 4px gainsboro,
+  0 4px 8px gainsboro,
   0 8px 16px gainsboro,
-  0 16px 32px gainsboro, 
+  0 16px 32px gainsboro,
   0 32px 64px gainsboro;
   border-radius: 5px;
   overflow: hidden;
@@ -68,15 +100,15 @@ tbody tr {
   font-size: 14pt;
 }
 tbody tr:last-of-type {
-  border-bottom: 3px solid #F7CAC9;
+  border-bottom: 3px solid #1C2833;
 }
 thead tr:last-of-type {
   box-shadow: none;
 }
 table thead {
-  background-color: #20B2AA;
+  background-color: #1C2833;
   color: white;
-  font-family: Candara;
+  font-family: Candara, serif;
   font-size: 14pt;
 }
 tbody tr {
@@ -112,11 +144,11 @@ td {
 }
 #form-container form {
   background-color: white;
-  box-shadow: 0 1px 2px gainsboro, 
-  0 2px 4px gainsboro, 
-  0 4px 8px gainsboro, 
+  box-shadow: 0 1px 2px gainsboro,
+  0 2px 4px gainsboro,
+  0 4px 8px gainsboro,
   0 8px 16px gainsboro,
-  0 16px 32px gainsboro, 
+  0 16px 32px gainsboro,
   0 32px 64px gainsboro;
   height: 370px;
   width: 400px;
@@ -126,6 +158,7 @@ td {
   padding-top: 30px;
   border-radius: 4px;
   position: absolute;
+
 }
 #form-container input {
   border-radius: 5px;
@@ -138,7 +171,7 @@ td {
   margin: 10px auto;
 }
 #form-container input:focus{
-  border: 1px solid #20B2AA;
+  border: 1px solid #1C2833;
 }
 #form-container button {
   display: block;
@@ -153,3 +186,16 @@ td {
   background-color: white;
 }
 /* END FORM */
+
+#filters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#filters button {
+}
+#filters button:hover {
+  background-color: white;
+  color: #1C2833;
+  border-bottom: 1px solid black;
+}

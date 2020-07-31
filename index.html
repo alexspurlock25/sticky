@@ -11,8 +11,14 @@
   </head>
   <body>
     <div id="menu-container">
-      <button type="button" id="add-btn-menu"><img src="https://img.icons8.com/windows/32/000000/add.png"/></button>
-      <button type="button" id="edit-btn-menu"><img src="https://img.icons8.com/windows/32/000000/edit.png"/></button>
+      <div id="left-side-menu">
+        <input type="search" id="search-bar" >
+      </div>
+      <div id="right-side-menu">
+        <button type="button" id="add-btn-menu"><img src="images/add_icon.png"/></button>
+        <button type="button" id="edit-btn-menu"><img src="images/edit_icon.png"/></button>
+        <button type="button" id="filter-btn-menu"><img src="images/filter_icon.png"/></button>
+      </div>
     </div>
     <div id="form-container">
       <form id="add-form" method="POST">
@@ -33,6 +39,12 @@
       </form>
     </div>
 
+    <div id="filters">
+      <button id="filter-recent">Recent</button>
+      <button id="filter-a-z">Aplha.</button>
+      <button id="filer-security">Security</button>
+    </div>
+
     <div id="wrapper">
       <main>
         <table>
@@ -42,18 +54,15 @@
               <th scope="col">Username</th>
               <th scope="col">Email</th>
               <th scope="col">Password</th>
-              <th scope="col">
-                <button type="button" id="cancel-edit-btn">CANCEL</button>
-              </th>
+              <th scope="col"><button type="button" id="cancel-edit-btn">CANCEL</button></th>
             </tr>
           </thead>
           <tbody></tbody>
         </table>
       </main>
     </div>
-
-    <script>window.jQuery = window.$ = require("jquery");</script>
     <script src="db/initialize_db.js"></script>
     <script src="js/ajax_buttons.js"></script>
+    <script src="js/other_functions.js"></script>
   </body>
 </html>
