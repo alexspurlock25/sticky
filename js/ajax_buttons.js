@@ -1,4 +1,3 @@
-window.$ = require("jquery")
 let row_id;
 
 $(document).ready( function () {
@@ -9,7 +8,7 @@ $(document).ready( function () {
 
     $.ajax({
         method: "GET",
-        url: "http://localhost:3000/info",
+        url: "http://localhost:3000/get-all-rows",
         success: function (response) {
             loadAllRows(response)
             $("tbody td:last-child").hide()
@@ -57,7 +56,7 @@ $("#edit-form").submit( function(e) {
 
     $.ajax({
         method: "POST",
-        url: "http://localhost:3000/edit",
+        url: "http://localhost:3000/update-row",
         data: {
             infoid: row_id,
             url: url,
@@ -66,7 +65,7 @@ $("#edit-form").submit( function(e) {
             password: password
         },
         success: function (response) {
-            
+
             $("#row-" + response.infoid + " #td-url").text(response.url)
             $("#row-" + response.infoid + " #td-username").text(response.username)
             $("#row-" + response.infoid + " #td-email").text(response.email)
@@ -97,7 +96,7 @@ $("#add-form").submit( function (e) {
     $.ajax({
         method: "POST",
         cache: false,
-        url: "http://localhost:3000/add",
+        url: "http://localhost:3000/add-row",
         data: {
             url: url,
             username: username,
@@ -151,7 +150,7 @@ $("#cancel-edit-btn").click( function () {
     $("#menu-container").show(300)
 
     $("#edit-btn-row").prop("disabled", true)
-    $("#delete-btn-row").prop("disabled", true)  
+    $("#delete-btn-row").prop("disabled", true)
 
     $("tbody td:last-child").hide(200)
     $("thead th:last-child").hide(200)
@@ -160,6 +159,8 @@ $("#cancel-edit-btn").click( function () {
 // LOAD ALL ROWS from database after successful ajax call
 function loadAllRows(rows) {
 
+  let strengthbar = document.getElementById('td-pass-stren')
+
     rows.forEach( (row) => {
 
         let htmlTableRow = "<tr id='row-" + row.infoid + "'>"
@@ -167,7 +168,8 @@ function loadAllRows(rows) {
             + "<td id='td-username'>" + row.username + "</td>"
             + "<td id='td-email'>" + row.email + "</td>"
             + "<td id='td-password'>" + row.password + "</td>"
-            + "<td id='td-date'>" + row.date + "</td>"
+            // + "<td id='td-date'>" + row.date + "</td>"
+            + "<td id='td-pass-stren'>" + strength + "</td>"
             + "<td><button value='"+ row.infoid +"' id='edit-btn-row' onclick='editRow(this)'><img alt='Edit' src='https://img.icons8.com/windows/32/000000/edit.png'/></button><button value='"+ row.infoid +"' id='delete-btn-row' onclick='delete_row(this)'><img alt='Delete' src='https://img.icons8.com/windows/32/000000/trash.png'/></button></td>"
             + "</tr>";
 
@@ -222,7 +224,7 @@ function delete_row(clicked_button){
     $.ajax({
         method: "POST",
         cache: false,
-        url: "http://localhost:3000/delete",
+        url: "http://localhost:3000/delete-row",
         data: {
             infoid: button_value
         },

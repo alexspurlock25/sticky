@@ -8,7 +8,7 @@ let db = new sqlite3.Database(path.join (__dirname, "../user_database.sql"))
 
         db.serialize( function() {
 
-            db.all("SELECT infoid, url, username, email, password, date FROM tUserData;", function (err, rows) {
+            db.all("SELECT infoid, url, username, email, password FROM tUserData ORDER BY date DESC;", function (err, rows) {
 
                 if (!err) {
                     resolve(rows)
@@ -27,74 +27,74 @@ let db = new sqlite3.Database(path.join (__dirname, "../user_database.sql"))
 
 module.exports.sortDateDesc = function () {
     let db = new sqlite3.Database(path.join (__dirname, "../user_database.sql"))
-    
+
         return new Promise( function (resolve, reject) {
-    
+
             db.serialize( function() {
-    
+
                 db.all("SELECT infoid, url, username, email, password, date FROM tUserData ORDER BY date DESC;", function (err, rows) {
-    
+
                     if (!err) {
                         resolve(rows)
                     } else {
                         reject(err)
                     }
-    
+
                 })
-    
+
             })
             db.close()
-    
+
         })
-    
+
 }
 
 module.exports.sortTitleAlphaDESC = function () {
     let db = new sqlite3.Database(path.join (__dirname, "../user_database.sql"))
-    
+
         return new Promise( function (resolve, reject) {
-    
+
             db.serialize( function() {
-    
+
                 db.all("SELECT infoid, url, username, email, password, date FROM tUserData ORDER BY url DESC;", function (err, rows) {
-    
+
                     if (!err) {
                         resolve(rows)
                     } else {
                         reject(err)
                     }
-    
+
                 })
-    
+
             })
             db.close()
-    
+
         })
-    
+
 }
 
 module.exports.sortTitleAlphaASC = function () {
     let db = new sqlite3.Database(path.join (__dirname, "../user_database.sql"))
-    
+
         return new Promise( function (resolve, reject) {
-    
+
             db.serialize( function() {
-    
+
                 db.all("SELECT infoid, url, username, email, password, date FROM tUserData ORDER BY url ASC;", function (err, rows) {
-    
+
                     if (!err) {
                         resolve(rows)
                     } else {
                         reject(err)
                     }
-    
+
                 })
-    
+
             })
             db.close()
-    
+
         })
-    
+
 }
 
 module.exports.getRow = function(row_to_edit) {
