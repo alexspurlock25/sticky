@@ -6,8 +6,8 @@ let user_info = require("./tables/account_info")
 app.use(body_parser.urlencoded({extended: true }))
 
 app.get("/info", function (req, res) {
-    user_info.getInfo().then( function (all_rows) {
-        res.json(all_rows)
+    user_info.getInfo().then( function (response) {
+        res.json(response)
     }).catch( function () {
 
     })
@@ -15,6 +15,12 @@ app.get("/info", function (req, res) {
 
 app.get("/get_one_row", function(req, res) {
     user_info.getRow(req.query.infoid).then( function(response) {
+        res.json(response)
+    })
+})
+
+app.get("/sort_desc", function(req, res) {
+    user_info.sortDesc().then( function(response) {
         res.json(response)
     })
 })

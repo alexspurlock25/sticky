@@ -10,11 +10,11 @@ db.serialize(function(err) {
     + "username TEXT, "
     + "email TEXT, "
     + "password TEXT, "
-    + "date DATETIME DEFAULT current_timestamp"
+    + "date DATETIME DEFAULT CURRENT_TIMESTAMP )"
   );
 
     if (err) {
-        console.log(err.message)
+        console.log("INITIALIZING PROBLEM\nERROR: " + err.message)
     }
 
     db.close()

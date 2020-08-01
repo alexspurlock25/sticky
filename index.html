@@ -40,9 +40,9 @@
     </div>
 
     <div id="filters">
-      <button id="filter-recent">Recent</button>
-      <button id="filter-a-z">Aplha.</button>
-      <button id="filer-security">Security</button>
+      <button type="button" id="filter-recent">Recent</button>
+      <button type="button" id="filter-a-z">A-Z</button>
+      <button type="button" id="filer-security">Security</button>
     </div>
 
     <div id="wrapper">
@@ -54,15 +54,19 @@
               <th scope="col">Username</th>
               <th scope="col">Email</th>
               <th scope="col">Password</th>
+              <th id="col-date" scope="col">Date</th>
               <th scope="col"><button type="button" id="cancel-edit-btn">CANCEL</button></th>
             </tr>
           </thead>
-          <tbody></tbody>
+          <tbody id="table-body"></tbody>
         </table>
       </main>
     </div>
+    <script>window.$ = require("jquery")</script>
+    <script src="js/custom_functions.js"></script>
     <script src="db/initialize_db.js"></script>
     <script src="js/ajax_buttons.js"></script>
     <script src="js/other_functions.js"></script>
+    <script src="js/Sort.js"></script>
   </body>
 </html>

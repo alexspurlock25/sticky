@@ -6,9 +6,9 @@ let db = new sqlite3.Database(path.join (__dirname, "../user_database.sql"))
 
     return new Promise( function (resolve, reject) {
 
-        db.serialize( function () {
+        db.serialize( function() {
 
-            db.all("SELECT infoid, url, username, email, password FROM tUserData;", function (err, rows) {
+            db.all("SELECT infoid, url, username, email, password, date FROM tUserData;", function (err, rows) {
 
                 if (!err) {
                     resolve(rows)
@@ -24,6 +24,30 @@ let db = new sqlite3.Database(path.join (__dirname, "../user_database.sql"))
     })
 
 }
+
+module.exports.sortDesc = function () {
+    let db = new sqlite3.Database(path.join (__dirname, "../user_database.sql"))
+    
+        return new Promise( function (resolve, reject) {
+    
+            db.serialize( function() {
+    
+                db.all("SELECT infoid, url, username, email, password, date FROM tUserData ORDER BY date DESC;", function (err, rows) {
+    
+                    if (!err) {
+                        resolve(rows)
+                    } else {
+                        reject(err)
+                    }
+    
+                })
+    
+            })
+            db.close()
+    
+        })
+    
+    }
 
 module.exports.getRow = function(row_to_edit) {
     let db = new sqlite3.Database(path.join (__dirname, "../user_database.sql"))

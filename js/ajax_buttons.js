@@ -167,6 +167,7 @@ function loadAllRows(rows) {
             + "<td id='td-username'>" + row.username + "</td>"
             + "<td id='td-email'>" + row.email + "</td>"
             + "<td id='td-password'>" + row.password + "</td>"
+            + "<td id='td-date'>" + row.date + "</td>"
             + "<td><button value='"+ row.infoid +"' id='edit-btn-row' onclick='editRow(this)'><img alt='Edit' src='https://img.icons8.com/windows/32/000000/edit.png'/></button><button value='"+ row.infoid +"' id='delete-btn-row' onclick='delete_row(this)'><img alt='Delete' src='https://img.icons8.com/windows/32/000000/trash.png'/></button></td>"
             + "</tr>";
 
