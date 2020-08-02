@@ -10,7 +10,9 @@ db.serialize(function(err) {
     + "username TEXT, "
     + "email TEXT, "
     + "password TEXT, "
-    + "date DATETIME DEFAULT CURRENT_TIMESTAMP )"
+    + "date DATETIME DEFAULT CURRENT_TIMESTAMP, "
+    + "pass_strength_numeric INTEGER, "
+    + "pass_strength_interpretation TEXT)"
   );
 
     if (err) {
