@@ -18,13 +18,18 @@ class Sort {
                         + "<td id='td-email'>" + row.email + "</td>"
                         + "<td id='td-password'>" + row.password + "</td>"
                         + "<td id='td-pass-stren-graded'>" + row.pass_strength_interpretation + "</td>"
-                        + "<td><button value='"+ row.infoid +"' id='edit-btn-row' onclick='editRow(this)'><img alt='Edit' src=images/edit_icon.png'/></button><button value='"+ row.row_id +"' id='delete-btn-row' onclick='deleteRow(this)'><img alt='Delete' src='images/delete_icon.png'/></button></td>"
+                        + "<td><button value='"+ row.infoid +"' id='edit-btn-row' onclick='editRow(this)'><img alt='Edit' src='images/edit_icon.png'/></button><button value='"+ row.row_id +"' id='delete-btn-row' onclick='deleteRow(this)'><img alt='Delete' src='images/delete_icon.png'/></button></td>"
                         + "</tr>";
 
                     // append row
                     $("table tbody").append(htmlTableRow)
                     
                 })
+
+                $("tbody td:nth-child(5)").hide()
+                $("thead th:nth-child(5)").hide()
+                $("tbody td:last-child").hide()
+                $("thead th:last-child").hide()
 
             }
         })
@@ -45,13 +50,18 @@ class Sort {
                         + "<td id='td-email'>" + row.email + "</td>"
                         + "<td id='td-password'>" + row.password + "</td>"
                         + "<td id='td-pass-stren-graded'>" + row.pass_strength_interpretation + "</td>"
-                        + "<td><button value='"+ row.infoid +"' id='edit-btn-row' onclick='editRow(this)'><img alt='Edit' src=images/edit_icon.png'/></button><button value='"+ row.row_id +"' id='delete-btn-row' onclick='deleteRow(this)'><img alt='Delete' src='images/delete_icon.png'/></button></td>"
+                        + "<td><button value='"+ row.infoid +"' id='edit-btn-row' onclick='editRow(this)'><img alt='Edit' src='images/edit_icon.png'/></button><button value='"+ row.row_id +"' id='delete-btn-row' onclick='deleteRow(this)'><img alt='Delete' src='images/delete_icon.png'/></button></td>"
                         + "</tr>";
 
                     // append row
                     $("table tbody").append(htmlTableRow)
                     
                 })
+
+                $("tbody td:nth-child(5)").hide()
+                $("thead th:nth-child(5)").hide()
+                $("tbody td:last-child").hide()
+                $("thead th:last-child").hide()
 
             }
         })
@@ -73,22 +83,24 @@ class Sort {
                         + "<td id='td-email'>" + row.email + "</td>"
                         + "<td id='td-password'>" + row.password + "</td>"
                         + "<td id='td-pass-stren-graded'>" + row.pass_strength_interpretation + "</td>"
-                        + "<td><button value='"+ row.infoid +"' id='edit-btn-row' onclick='editRow(this)'><img alt='Edit' src='https://img.icons8.com/windows/32/000000/edit.png'/></button><button value='"+ row.infoid +"' id='delete-btn-row' onclick='delete_row(this)'><img alt='Delete' src='https://img.icons8.com/windows/32/000000/trash.png'/></button></td>"
+                        + "<td><button value='"+ row.infoid +"' id='edit-btn-row' onclick='editRow(this)'><img alt='Edit' src='images/edit_icon.png'/></button><button value='"+ row.infoid +"' id='delete-btn-row' onclick='deleteRow(this)'><img alt='Delete' src='images/delete_icon.png'/></button></td>"
                         + "</tr>";
         
                     $("table tbody").append(htmlTableRow)
                     
                 })
 
+                $("tbody td:nth-child(5)").hide()
+                $("thead th:nth-child(5)").hide()
                 $("tbody td:last-child").hide()
                 $("thead th:last-child").hide()
+
             },
             error: function(){
                 console.log("Error: Failed to load data.")
             }
         })
 
-        console.log("sorted by alpha! (title desc)")
     }
 
     byTitleAlphaASC(){
@@ -107,15 +119,18 @@ class Sort {
                         + "<td id='td-email'>" + row.email + "</td>"
                         + "<td id='td-password'>" + row.password + "</td>"
                         + "<td id='td-pass-stren-graded'>" + row.pass_strength_interpretation + "</td>"
-                        + "<td><button value='"+ row.infoid +"' id='edit-btn-row' onclick='editRow(this)'><img alt='Edit' src='https://img.icons8.com/windows/32/000000/edit.png'/></button><button value='"+ row.infoid +"' id='delete-btn-row' onclick='delete_row(this)'><img alt='Delete' src='https://img.icons8.com/windows/32/000000/trash.png'/></button></td>"
+                        + "<td><button value='"+ row.infoid +"' id='edit-btn-row' onclick='editRow(this)'><img alt='Edit' src='images/edit_icon.png'/></button><button value='"+ row.infoid +"' id='delete-btn-row' onclick='deleteRow(this)'><img alt='Delete' src='images/delete_icon.png'/></button></td>"
                         + "</tr>";
         
                     $("table tbody").append(htmlTableRow)
                     
                 })
 
+                $("tbody td:nth-child(5)").hide()
+                $("thead th:nth-child(5)").hide()
                 $("tbody td:last-child").hide()
                 $("thead th:last-child").hide()
+
             },
             error: function(){
                 console.log("Error: Failed to load data.")
@@ -139,13 +154,15 @@ class Sort {
                         + "<td id='td-email'>" + row.email + "</td>"
                         + "<td id='td-password'>" + row.password + "</td>"
                         + "<td id='td-pass-stren-graded'>" + row.pass_strength_interpretation + "</td>"
-                        + "<td><button value='"+ row.infoid +"' id='edit-btn-row' onclick='editRow(this)'><img alt='Edit' src='https://img.icons8.com/windows/32/000000/edit.png'/></button><button value='"+ row.infoid +"' id='delete-btn-row' onclick='delete_row(this)'><img alt='Delete' src='https://img.icons8.com/windows/32/000000/trash.png'/></button></td>"
+                        + "<td><button value='"+ row.infoid +"' id='edit-btn-row' onclick='editRow(this)'><img alt='Edit' src='images/edit_icon.png'/></button><button value='"+ row.infoid +"' id='delete-btn-row' onclick='deleteRow(this)'><img alt='Delete' src='images/delete_icon.png'/></button></td>"
                         + "</tr>";
         
                     $("table tbody").append(htmlTableRow)
                     
                 })
 
+                $("tbody td:nth-child(5)").show(300)
+                $("thead th:nth-child(5)").show(300)
                 $("tbody td:last-child").hide()
                 $("thead th:last-child").hide()
             },
@@ -154,7 +171,6 @@ class Sort {
             }
         })
 
-        console.log("sorted by password security! (desc)")
     }
 
     byPassSecurityASC() {
@@ -173,13 +189,15 @@ class Sort {
                         + "<td id='td-email'>" + row.email + "</td>"
                         + "<td id='td-password'>" + row.password + "</td>"
                         + "<td id='td-pass-stren-graded'>" + row.pass_strength_interpretation + "</td>"
-                        + "<td><button value='"+ row.infoid +"' id='edit-btn-row' onclick='editRow(this)'><img alt='Edit' src='https://img.icons8.com/windows/32/000000/edit.png'/></button><button value='"+ row.infoid +"' id='delete-btn-row' onclick='delete_row(this)'><img alt='Delete' src='https://img.icons8.com/windows/32/000000/trash.png'/></button></td>"
+                        + "<td><button value='"+ row.infoid +"' id='edit-btn-row' onclick='editRow(this)'><img alt='Edit' src='images/edit_icon.png'/></button><button value='"+ row.infoid +"' id='delete-btn-row' onclick='deleteRow(this)'><img alt='Delete' src='images/delete_icon.png'/></button></td>"
                         + "</tr>";
         
                     $("table tbody").append(htmlTableRow)
                     
                 })
 
+                $("tbody td:nth-child(5)").show(300)
+                $("thead th:nth-child(5)").show(300)
                 $("tbody td:last-child").hide()
                 $("thead th:last-child").hide()
             },
@@ -188,15 +206,12 @@ class Sort {
             }
         })
 
-        console.log("sorted by password security! (asc)")
     }
 
 }
 
 $("#filter-recent").on("click", toggleTwoFunctions (  function() {
     new Sort().byDateDesc()
-    $("tbody td:last-child").hide()
-    $("thead th:last-child").hide()
 }, function() {
     new Sort().byDateASC()
 }))

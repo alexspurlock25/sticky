@@ -1,3 +1,5 @@
+// file to handle all my get/post requests
+
 let sqlite3 = require("sqlite3").verbose()
 let path = require("path")
 let Password = require("../../js/Password")
@@ -235,6 +237,7 @@ module.exports.removeAccount = function (row_id) {
 
 }
 
+// update one account in database table
 module.exports.updateAccount = function (data) {
 
     let db_conn = new sqlite3.Database(path.join (__dirname, "../user_database.sql"))

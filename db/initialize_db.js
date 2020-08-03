@@ -1,9 +1,23 @@
 const sqlite3 = require("sqlite3").verbose()
 let path = require("path")
-let db = new sqlite3.Database(path.join(__dirname, "/db/user_database.sql"))
 
-db.serialize(function(err) {
-    db.run(
+// db connection... in this case, it's local
+let db_conn = new sqlite3.Database(path.join(__dirname, "/db/user_database.sql"))
+
+/*
+COLUMNS:
+  infoid - primary key
+  url - not null
+  username
+  email
+  password
+  date
+  pass_strength_numeric
+  pass_strength_interpretation
+*/
+// Create table if it doesn't exists.
+db_conn.serialize(function(err) {
+  db_conn.run(
       "CREATE TABLE IF NOT EXISTS tUserData"
     + "(infoid INTEGER PRIMARY KEY AUTOINCREMENT,"
     + "url TEXT NOT NULL,"
@@ -19,6 +33,7 @@ db.serialize(function(err) {
         console.log("INITIALIZING PROBLEM\nERROR: " + err.message)
     }
 
-    db.close()
+    // close conn
+    db_conn.close()
 
 });

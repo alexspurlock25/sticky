@@ -9,6 +9,8 @@ $(document).ready( function () {
         url: "http://localhost:3000/get-all-rows",
         success: function (response) {
             loadAllRows(response)
+            $("tbody td:nth-child(5)").hide()
+            $("thead th:nth-child(5)").hide()
             $("tbody td:last-child").hide()
             $("thead th:last-child").hide()
         },
@@ -19,6 +21,9 @@ $(document).ready( function () {
 })
 
 $("#add-btn-menu").click( function () {
+    
+    $("tbody td:nth-child(5)").hide(300)
+    $("thead th:nth-child(5)").hide(300)
 
     $("#menu-container").hide(300)
     $("table").hide(300)
@@ -30,6 +35,8 @@ $("#add-btn-menu").click( function () {
 $("#edit-btn-menu").click( function () {
 
     $("#menu-container").hide(300)
+    $("tbody td:nth-child(5)").hide(300)
+    $("thead th:nth-child(5)").hide(300)
     $("tbody td:last-child").show(200)
     $("thead th:last-child").show(200)
     $("#filters").hide(300)
@@ -41,6 +48,8 @@ $("#edit-btn-menu").click( function () {
 })
 
 $("#filter-btn-menu").click( function () {
+    $("tbody td:nth-child(5)").hide(300)
+    $("thead th:nth-child(5)").hide(300)
     $("#filters").toggle(300)
 })
 // EDIT FORM SUBMIT function that interacts with database using ajax
@@ -63,7 +72,6 @@ $("#edit-form").submit( function(e) {
             password: password
         },
         success: function (response) {
-            console.log(response)
 
             $("#row-" + response.infoid + " #td-url").text(response.url)
             $("#row-" + response.infoid + " #td-username").text(response.username)
@@ -77,6 +85,9 @@ $("#edit-form").submit( function(e) {
             console.log("Error: Failed to load data.")
         }
     })
+
+    $("tbody td:nth-child(5)").hide(300)
+    $("thead th:nth-child(5)").hide(300)
 
     $("#edit-form").hide(300).trigger("reset")
     $("table").show(300)
@@ -105,7 +116,8 @@ $("#add-form").submit( function (e) {
         },
         success: function(response) {
             addRow(response)
-
+            $("tbody td:nth-child(5)").hide()
+            $("thead th:nth-child(5)").hide()
             $("tbody td:last-child").hide()
             $("thead th:last-child").hide()
             console.log("Row Added.")
@@ -182,7 +194,7 @@ function addRow(row) {
         + "<td id='td-email'>" + row.email + "</td>"
         + "<td id='td-password'>" + row.password + "</td>"
         + "<td id='td-pass-stren-graded'>" + row.pass_strength_interpretation + "</td>"
-        + "<td><button value='"+ row.infoid +"' id='edit-btn-row' onclick='editRow(this)'><img alt='Edit' src=./images/edit_icon.png'/></button><button value='"+ row.row_id +"' id='delete-btn-row' onclick='deleteRow(this)'><img alt='Delete' src='./images/delete_icon.png'/></button></td>"
+        + "<td><button value='"+ row.infoid +"' id='edit-btn-row' onclick='editRow(this)'><img alt='Edit' src='./images/edit_icon.png'/></button><button value='"+ row.row_id +"' id='delete-btn-row' onclick='deleteRow(this)'><img alt='Delete' src='./images/delete_icon.png'/></button></td>"
         + "</tr>";
 
         // append row
