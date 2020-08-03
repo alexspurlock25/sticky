@@ -47,6 +47,18 @@ app.get("/sort-title-alpha-asc", function(req, res) {
     })
 })
 
+app.get("/sort-pass-sec-asc", function(req, res) {
+    user_info.sortPassSecurityASC().then( function(response) {
+        res.json(response)
+    })
+})
+
+app.get("/sort-pass-sec-desc", function(req, res) {
+    user_info.sortPassSecurityDESC().then( function(response) {
+        res.json(response)
+    })
+})
+
 app.post("/add-row", function (req, res) {
     user_info.addAccount(req.body).then( function(response) {
         res.json(response)
