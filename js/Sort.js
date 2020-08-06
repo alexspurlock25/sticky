@@ -210,6 +210,9 @@ class Sort {
 
 }
 
+    hide_duration = 200;
+    show_duration = 200;
+
 $("#filter-recent").on("click", toggleTwoFunctions (  function() {
     new Sort().byDateDesc()
 }, function() {

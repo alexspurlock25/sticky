@@ -12,7 +12,7 @@ input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration {
   -webkit-appearance:none;
 }
-#menu-container {
+#menu-container, #settings-menu-container {
   max-width: 1000px;
   margin: 0 auto 10px;
   width: 97%;
@@ -44,8 +44,7 @@ input[type="search"]::-webkit-search-results-decoration {
   height: 100%;
   float: right;
 }
-
-#menu-container button {
+#menu-container button, #settings-menu-container button {
   background-color: white;
   margin: 1px;
   padding: 0;
@@ -87,7 +86,7 @@ table {
   border-radius: 5px;
   overflow: hidden;
   width: 98%;
-  max-width: 1000px;
+  max-width: 1300px;
 }
 #edit-btn-row, #delete-btn-row {
   background-color: white;
@@ -111,6 +110,9 @@ table thead {
   font-family: Candara, serif;
   font-size: 14pt;
 }
+thead tr {
+  height: 30px;
+}
 tbody tr {
   border-bottom: 1px solid gainsboro;
 }
@@ -129,9 +131,6 @@ td:last-child{
 }
 td {
   height: 70px;
-}
-#cancel-edit-btn {
-  border-radius: 3px;
 }
 
 
@@ -181,7 +180,7 @@ td {
   font-size: 14pt;
 }
 #form-container button:hover {
-  border: 2px solid black;
+  border-bottom: 2px solid black;
   color: black;
   background-color: white;
 }
@@ -191,8 +190,6 @@ td {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-#filters button {
 }
 #filters button:hover {
   background-color: white;

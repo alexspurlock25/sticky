@@ -7,19 +7,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' http://* 'unsafe-inline';" />
     <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/settings.css" />
     <title>Sticky</title>
   </head>
   <body>
+  <div id="main-app">
     <div id="menu-container">
       <div id="left-side-menu">
         <input type="search" id="search-bar" >
       </div>
       <div id="right-side-menu">
-        <button type="button" id="add-btn-menu"><img src="images/add_icon.png"/></button>
-        <button type="button" id="edit-btn-menu"><img src="images/edit_icon.png"/></button>
-        <button type="button" id="filter-btn-menu"><img src="images/filter_icon.png"/></button>
+        <button type="button" id="add-btn-menu"><img alt="Add Account" src="images/add_icon.png"/></button>
+        <button type="button" id="edit-btn-menu"><img alt="Edit Account" src="images/edit_icon.png"/></button>
+        <button type="button" id="filter-btn-menu"><img alt="Filter" src="images/filter_icon.png"/></button>
+        <button type="button" id="settings-btn-menu"><img alt="Settings" src="images/settings_icon.png"/></button>
       </div>
     </div>
+
     <div id="form-container">
       <form id="add-form" method="POST">
         <input type="text" placeholder="Title *" id="add-txtbx-url" required />
@@ -41,7 +45,7 @@
 
     <div id="filters">
       <button type="button" id="filter-recent">Recent</button>
-      <button type="button" id="filter-a-z">TITLE: A-Z</button>
+      <button type="button" id="filter-a-z">A-Z</button>
       <button type="button" id="filer-security">Security</button>
     </div>
 
@@ -54,7 +58,7 @@
               <th scope="col">Username</th>
               <th scope="col">Email</th>
               <th scope="col">Password</th>
-              <th scope="col">Pass Grade</th>
+              <th scope="col">Pass. Security</th>
               <th scope="col"><button type="button" id="cancel-edit-btn">CANCEL</button></th>
             </tr>
           </thead>
@@ -62,8 +66,34 @@
         </table>
       </main>
     </div>
+  </div>
 
-    <script>window.$ = require("jquery")</script>
+    <div id="settings-menu">
+      <div id="settings-menu-container">
+      <div id="settings-left-side-menu">
+        <button type="button" id="settings-back-btn"><img alt="Back" src="images/back_icon.png"/></button>
+      </div>
+
+        <div id="settings-container">
+          <div id="left-side-menu-link">
+            <ul>
+              <li class="active" id="appearance-li">Appearance</li>
+              <li id="general-li">General</li>
+              <li id="about-li">About</li>
+            </ul>
+          </div>
+          <div id="right-side-menu-contents">
+            <div id="appearance-content">Appearance stuff here</div>
+            <div id="general-content">General stuff here</div>
+            <div id="about-content">about stuff here</div>
+          </div>
+        </div>
+
+    </div>
+
+    <script>window.$ = window.jQuery = require("jquery");</script>
+    <script src="js/jquery_ui/jquery-ui.min.js"></script>
+      <script src="js/settings_menu.js"></script>
     <script src="js/custom_functions.js"></script>
     <script src="db/initialize_db.js"></script>
     <script src="js/ajax_buttons.js"></script>

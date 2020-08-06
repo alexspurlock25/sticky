@@ -1,14 +1,20 @@
+let hide_duration = 200;
+let show_duration = 200;
+
 $(document).ready( function () {
 
-    $("#add-form").hide()
-    $("#edit-form").hide()
-    $("#filters").hide()
+    $("#settings-menu").hide();
+    $("#add-form").hide();
+    $("#edit-form").hide();
+    $("#filters").hide();
 
     $.ajax({ 
         method: "GET",
         url: "http://localhost:3000/get-all-rows",
         success: function (response) {
+
             loadAllRows(response)
+            
             $("tbody td:nth-child(5)").hide()
             $("thead th:nth-child(5)").hide()
             $("tbody td:last-child").hide()
@@ -22,36 +28,38 @@ $(document).ready( function () {
 
 $("#add-btn-menu").click( function () {
     
-    $("tbody td:nth-child(5)").hide(300)
-    $("thead th:nth-child(5)").hide(300)
+    $("tbody td:nth-child(5)").hide()
+    $("thead th:nth-child(5)").hide()
 
-    $("#menu-container").hide(300)
-    $("table").hide(300)
-    $("#add-form").show(300)
-    $("#filters").hide(300)
+    $("#menu-container").hide(hide_duration)
+    $("table").hide(hide_duration)
+    $("#add-form").show(show_duration)
+    $("#filters").hide(hide_duration)
 
 })
 
 $("#edit-btn-menu").click( function () {
 
-    $("#menu-container").hide(300)
-    $("tbody td:nth-child(5)").hide(300)
-    $("thead th:nth-child(5)").hide(300)
-    $("tbody td:last-child").show(200)
-    $("thead th:last-child").show(200)
-    $("#filters").hide(300)
+    $("#menu-container").hide(hide_duration);
+
+    $("tbody td:nth-child(5)").hide();
+    $("thead th:nth-child(5)").hide();
+    $("thead th:last-child").show(show_duration);
+    $("tbody td:last-child").show(show_duration);
+    $("#filters").hide(hide_duration);
 
 
-    $("#edit-btn-row").prop("disabled", false)
-    $("#delete-btn-row").prop("disabled", false)
+    $("#edit-btn-row").prop("disabled", false);
+    $("#delete-btn-row").prop("disabled", false);
 
 })
 
 $("#filter-btn-menu").click( function () {
-    $("tbody td:nth-child(5)").hide(300)
-    $("thead th:nth-child(5)").hide(300)
-    $("#filters").toggle(300)
+    $("tbody td:nth-child(5)").hide(hide_duration)
+    $("thead th:nth-child(5)").hide(hide_duration)
+    $("#filters").toggle(hide_duration)
 })
+
 // EDIT FORM SUBMIT function that interacts with database using ajax
 $("#edit-form").submit( function(e) {
     e.preventDefault()
@@ -86,12 +94,12 @@ $("#edit-form").submit( function(e) {
         }
     })
 
-    $("tbody td:nth-child(5)").hide(300)
-    $("thead th:nth-child(5)").hide(300)
+    $("tbody td:nth-child(5)").hide(hide_duration)
+    $("thead th:nth-child(5)").hide(hide_duration)
 
-    $("#edit-form").hide(300).trigger("reset")
-    $("table").show(300)
-    $("#menu-container").show(300)
+    $("#edit-form").hide(hide_duration).trigger("reset")
+    $("table").show(show_duration00)
+    $("#menu-container").show(show_duration)
 
 })
 
@@ -126,44 +134,44 @@ $("#add-form").submit( function (e) {
             console.log("ERROR: Can't add row.")
         }
     })
-    $("#add-form").hide(300).trigger("reset")
-    $("table").show(300)
-    $("#menu-container").show(300)
+    $("#add-form").hide(hide_duration).trigger("reset")
+    $("table").show(show_duration)
+    $("#menu-container").show(show_duration)
 
 })
 
 // CANCEL ADD FORM BUTTON that cancels changes and exits the form.
 $("#add-form-cancel-btn").click( function () {
-    $("#add-form").hide(300).trigger("reset")
-    $("table").show(300)
+    $("#add-form").hide(hide_duration).trigger("reset")
+    $("table").show(show_duration)
 
-    $("#menu-container").show(300)
+    $("#menu-container").show(show_duration)
     $("#edit-btn-row").prop("disabled", false)
     $("#delete-btn-row").prop("disabled", false)
 })
 
 // CANCEL EDIT FORM BUTTON that cancels changes and exits the form.
 $("#edit-form-cancel-btn").click( function () {
-    $("#edit-form").hide(300).trigger("reset")
-    $("table").show(300)
+    $("#edit-form").hide(hide_duration).trigger("reset")
+    $("table").show(show_duration)
 
-    $("tbody td:last-child").show(200)
-    $("thead th:last-child").show(200)
+    $("tbody td:last-child").show(show_duration)
+    $("thead th:last-child").show(show_duration)
     $("#edit-btn-row").prop("disabled", false)
     $("#delete-btn-row").prop("disabled", false)
 })
 
 // CANCEL EDIT BUTTON that is inside the table head.
 $("#cancel-edit-btn").click( function () {
-    $("#edit-form").hide(300).trigger("reset")
+    $("#edit-form").hide(hide_duration).trigger("reset")
 
-    $("#menu-container").show(300)
+    $("#menu-container").show(show_duration)
 
     $("#edit-btn-row").prop("disabled", true)
     $("#delete-btn-row").prop("disabled", true)
 
-    $("tbody td:last-child").hide(200)
-    $("thead th:last-child").hide(200)
+    $("tbody td:last-child").hide(hide_duration)
+    $("thead th:last-child").hide(hide_duration)
 })
 
 // LOAD ALL ROWS from database after successful ajax call
@@ -205,8 +213,8 @@ function addRow(row) {
 // EDIT ROW function that simply takes fills out #edit-form when button is clicked inside that row
 function editRow(clicked_row) {
 
-    $("tbody td:last-child").hide(200)
-    $("thead th:last-child").hide(200)
+    $("tbody td:last-child").hide(hide_duration)
+    $("thead th:last-child").hide(hide_duration)
 
     let row_num = $(clicked_row).attr("value")
     row_id = row_num
@@ -220,7 +228,7 @@ function editRow(clicked_row) {
     $("#edit-txtbx-email").attr("value", email)
     $("#edit-txtbx-password").attr("value", password)
 
-    $("table").hide(300)
+    $("table").hide(hide_duration)
     $("#edit-form").show()
 
 }
