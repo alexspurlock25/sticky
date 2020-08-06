@@ -1,3 +1,4 @@
+var row_id = 0;
 let hide_duration = 200;
 let show_duration = 200;
 
@@ -84,7 +85,7 @@ $("#edit-form").submit( function(e) {
             $("#row-" + response.infoid + " #td-url").text(response.url)
             $("#row-" + response.infoid + " #td-username").text(response.username)
             $("#row-" + response.infoid + " #td-email").text(response.email)
-            $("#row-" + response.infoid + " #td-password").text(response.password)
+            $("#row-" + response.infoid + " #td-password input").attr("value", response.password)
             $("#row-" + response.infoid + " #td-pass-stren-graded").text(response.pass_strength_interpretation)
 
             console.log("Row updated.")
@@ -98,7 +99,7 @@ $("#edit-form").submit( function(e) {
     $("thead th:nth-child(5)").hide(hide_duration)
 
     $("#edit-form").hide(hide_duration).trigger("reset")
-    $("table").show(show_duration00)
+    $("table").show(show_duration)
     $("#menu-container").show(show_duration)
 
 })
@@ -183,7 +184,7 @@ function loadAllRows(rows) {
             + "<td id='td-url'>" + row.url + "</td>"
             + "<td id='td-username'>" + row.username + "</td>"
             + "<td id='td-email'>" + row.email + "</td>"
-            + "<td id='td-password'>" + row.password + "</td>"
+            + "<td id='td-password'><input class='row-password-input' id='row-" + row.infoid+ "-password-inpt' type='password' value='" + row.password + "' readonly/><button id='row-hide-show-btn' value='" + row.infoid+ "' type='button' onclick='row_ShowPassword(this)' ><img src='./images/show_icon.png'></button></td>"
             + "<td id='td-pass-stren-graded'>" + row.pass_strength_interpretation + "</td>"
             + "<td><button value='"+ row.infoid +"' id='edit-btn-row' onclick='editRow(this)'><img alt='Edit' src='./images/edit_icon.png'/></button><button value='"+ row.infoid +"' id='delete-btn-row' onclick='deleteRow(this)'><img alt='Delete' src='./images/delete_icon.png'/></button></td>"
             + "</tr>";
@@ -200,7 +201,7 @@ function addRow(row) {
         + "<td id='td-url'>" + row.url + "</td>"
         + "<td id='td-username'>" + row.username + "</td>"
         + "<td id='td-email'>" + row.email + "</td>"
-        + "<td id='td-password'>" + row.password + "</td>"
+        + "<td id='td-password'><input class='row-password-input' id='row-" + row.infoid+ "-password-inpt' type='password' value='" + row.password + "' readonly/><button id='row-hide-show-btn' value='" + row.infoid+ "' type='button' onclick='row_ShowPassword(this)' ><img src='./images/show_icon.png'></button></td>"
         + "<td id='td-pass-stren-graded'>" + row.pass_strength_interpretation + "</td>"
         + "<td><button value='"+ row.infoid +"' id='edit-btn-row' onclick='editRow(this)'><img alt='Edit' src='./images/edit_icon.png'/></button><button value='"+ row.row_id +"' id='delete-btn-row' onclick='deleteRow(this)'><img alt='Delete' src='./images/delete_icon.png'/></button></td>"
         + "</tr>";
@@ -213,23 +214,23 @@ function addRow(row) {
 // EDIT ROW function that simply takes fills out #edit-form when button is clicked inside that row
 function editRow(clicked_row) {
 
-    $("tbody td:last-child").hide(hide_duration)
-    $("thead th:last-child").hide(hide_duration)
+    $("tbody td:last-child").hide(hide_duration);
+    $("thead th:last-child").hide(hide_duration);
 
-    let row_num = $(clicked_row).attr("value")
-    row_id = row_num
-    let url = $("#row-" + row_num + " #td-url").text()
-    let username = $("#row-" + row_num + " #td-username").text()
-    let email = $("#row-" + row_num + " #td-email").text()
-    let password = $("#row-" + row_num + " #td-password").text()
+    let row_num = $(clicked_row).attr("value");
+    row_id = row_num;
+    let url = $("#row-" + row_num + " #td-url").text();
+    let username = $("#row-" + row_num + " #td-username").text();
+    let email = $("#row-" + row_num + " #td-email").text();
+    let password = $("#row-" + row_num + " #td-password input").attr("value");
 
-    $("#edit-txtbx-url").attr("value", url)
-    $("#edit-txtbx-username").attr("value", username)
-    $("#edit-txtbx-email").attr("value", email)
-    $("#edit-txtbx-password").attr("value", password)
+    $("#edit-txtbx-url").attr("value", url);
+    $("#edit-txtbx-username").attr("value", username);
+    $("#edit-txtbx-email").attr("value", email);
+    $("#edit-txtbx-password").attr("value", password);
 
-    $("table").hide(hide_duration)
-    $("#edit-form").show()
+    $("table").hide(hide_duration);
+    $("#edit-form").show();
 
 }
 
@@ -253,4 +254,16 @@ function deleteRow(clicked_button){
         }
     })
 
+}
+
+// SHOW/HIDE PASSWORD function
+function row_ShowPassword(clicked_button) {
+
+    let button_value = $(clicked_button).attr("value")
+
+    if($("#row-"+button_value+"-password-inpt").attr("type") === "password") {
+        $("#row-"+button_value+"-password-inpt").attr("type", "text")
+    } else {
+        $("#row-"+button_value+"-password-inpt").attr("type", "password")
+    }
 }

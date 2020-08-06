@@ -9,4 +9,26 @@ $(document).ready(function(){
 
     })
 
+    $("#add-hide-show-btn").on("click", function () {
+
+        if($("#add-txtbx-password").attr("type") === "password") {
+
+            $("#add-txtbx-password").attr("type", "text");
+
+        } else {
+            $("#add-txtbx-password").attr("type", "password");
+        }
+    });
+
+    $("#edit-hide-show-btn").on("click", function () {
+
+        if($("#edit-txtbx-password").attr("type") === "password") {
+
+            $("#edit-txtbx-password").attr("type", "text");
+
+        } else {
+            $("#edit-txtbx-password").attr("type", "password");
+        }
+    });
+
 })

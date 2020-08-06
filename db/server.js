@@ -11,7 +11,6 @@ let app = express()
 let userData = require("./tables/user_data")
 
 
-
 app.use(body_parser.urlencoded({extended: true }))
 
 // get all rows
