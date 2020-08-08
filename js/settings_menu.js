@@ -8,17 +8,17 @@ $(document).ready( function () {
         $("#main-app").toggle(show_duration)
         $("#settings-menu").toggle(show_duration)
 
-    })
+    });
 
     $("#settings-back-btn").click( function () {
         $("#main-app").toggle(show_duration)
         $("#settings-menu").toggle(show_duration)
-    })
+    });
 
     $("li").click( function () {
         $("li").removeClass('active');
         $(this).addClass("active");
-    })
+    });
 
     $("#appearance-li").click( function () {
         $("#appearance-content").show();

@@ -7,6 +7,9 @@
 *:focus {
   outline: none;
 }
+:root {
+  --main-bg-color: #1C2833;
+}
 #add-hide-show-btn, #edit-hide-show-btn {
   width: 50px;
   height: 50px;
@@ -57,7 +60,7 @@ input[type="search"]::-webkit-search-results-decoration {
   width: 40px;
 }
 button {
-  background-color: #1C2833;
+  background-color: var(--main-bg-color);
   color: white;
   font-family: Candara, serif;
   font-size: 13pt;
@@ -68,6 +71,7 @@ button {
   margin: 0 9px;
 }
 table #row-hide-show-btn {
+  vertical-align: middle;
   background-color: white;
   float: right;
   height: 40px;
@@ -76,7 +80,8 @@ table #row-hide-show-btn {
   margin: 1px;
 }
 table input {
-  width: 80%;
+  width: 74%;
+  height: 100%;
   padding-left: 10px;
   display: flex;
   flex-direction: row;
@@ -88,7 +93,7 @@ table input {
   /*display: flex;*/
 }
 button:hover {
-  border-bottom: 1px solid #1C2833;
+  border-bottom: 1px solid var(--main-bg-color);
   cursor: pointer;
 }
 #cancel-edit-btn:hover {
@@ -124,13 +129,13 @@ tbody tr {
   font-size: 14pt;
 }
 tbody tr:last-of-type {
-  border-bottom: 3px solid #1C2833;
+  border-bottom: 3px solid var(--main-bg-color);
 }
 thead tr:last-of-type {
   box-shadow: none;
 }
 table thead {
-  background-color: #1C2833;
+  background-color: var(--main-bg-color);
   color: white;
   font-family: Candara, serif;
   font-size: 14pt;
@@ -195,7 +200,7 @@ td {
   margin: 10px auto;
 }
 #form-container input:focus{
-  border: 1px solid #1C2833;
+  border: 1px solid var(--main-bg-color);
 }
 #form-container button {
   display: block;
@@ -228,6 +233,6 @@ td {
 }
 #filters button:hover {
   background-color: white;
-  color: #1C2833;
+  color: var(--main-bg-color);
   border-bottom: 1px solid black;
 }

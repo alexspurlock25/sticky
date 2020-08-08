@@ -83,7 +83,15 @@
             </ul>
           </div>
           <div id="right-side-menu-contents">
-            <div id="appearance-content">Appearance stuff here</div>
+            <div id="appearance-content">
+              <h3 class="sub-setting-heading">Pick Colors</h3>
+              <div id="color-picker-container">
+                <button class="color-picker-btn" type="button" value="#1C2833" style="background-color: #1C2833;"></button>
+                <button class="color-picker-btn" type="button" value="#FF6F61" style="background-color: #FF6F61;"></button>
+                <button class="color-picker-btn" type="button" value="#F7CAC9" style="background-color: #F7CAC9;"></button>
+                <button class="color-picker-btn" type="button" value="#009B77" style="background-color: #009B77;"></button>
+              </div>
+            </div>
             <div id="general-content">General stuff here</div>
             <div id="about-content">about stuff here</div>
           </div>
@@ -93,7 +101,8 @@
 
     <script>window.$ = window.jQuery = require("jquery");</script>
     <script src="js/jquery_ui/jquery-ui.min.js"></script>
-      <script src="js/settings_menu.js"></script>
+    <script src="js/color_picker.js"></script>
+    <script src="js/settings_menu.js"></script>
     <script src="js/custom_functions.js"></script>
     <script src="db/initialize_db.js"></script>
     <script src="js/ajax_buttons.js"></script>
