@@ -1,7 +1,10 @@
+let settings = require("electron-settings")
+
 $(document).ready( function () {
 
     $("#general-content").hide()
     $("#about-content").hide()
+
 
     $("#settings-btn-menu").click( function () {
 

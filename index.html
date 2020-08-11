@@ -58,8 +58,8 @@
               <th scope="col">Username</th>
               <th scope="col">Email</th>
               <th scope="col">Password</th>
-              <th scope="col">Pass. Security</th>
-              <th scope="col"><button type="button" id="cancel-edit-btn">CANCEL</button></th>
+              <th style="display: none;" scope="col">Pass. Security</th>
+              <th style="display: none;" scope="col"><button type="button" id="cancel-edit-btn">CANCEL</button></th>
             </tr>
           </thead>
           <tbody id="table-body"></tbody>
@@ -78,30 +78,133 @@
           <div id="left-side-menu-link">
             <ul>
               <li class="active" id="appearance-li">Appearance</li>
-              <li id="general-li">General</li>
               <li id="about-li">About</li>
             </ul>
           </div>
           <div id="right-side-menu-contents">
             <div id="appearance-content">
               <h3 class="sub-setting-heading">Pick Colors</h3>
-              <div id="color-picker-container">
+              <div class="setting-group-container" id="color-picker-container">
                 <button class="color-picker-btn" type="button" value="#1C2833" style="background-color: #1C2833;"></button>
                 <button class="color-picker-btn" type="button" value="#FF6F61" style="background-color: #FF6F61;"></button>
                 <button class="color-picker-btn" type="button" value="#F7CAC9" style="background-color: #F7CAC9;"></button>
+                <button class="color-picker-btn" type="button" value="#6495ED" style="background-color: #6495ED;"></button>
                 <button class="color-picker-btn" type="button" value="#009B77" style="background-color: #009B77;"></button>
+                <button class="color-picker-btn" type="button" value="#2F4F4F" style="background-color: #2F4F4F;"></button>
+                <button class="color-picker-btn" type="button" value="#778899" style="background-color: #778899;"></button>
+                <button class="color-picker-btn" type="button" value="#9370DB" style="background-color: #9370DB;"></button>
+                <button class="color-picker-btn" type="button" value="#F48FB1" style="background-color: #F48FB1;"></button>
+              </div>
+
+              <h3 class="sub-setting-heading">Passwords</h3>
+              <div class="setting-group-container">
+                <form>
+                  <input type="checkbox" id="hide-show-password-chkbox" value="hide-show-password">
+                  <label for="hide-show-password-chkbox">Show/Hide all passwords in the main screen.</label>
+                </form>
               </div>
             </div>
-            <div id="general-content">General stuff here</div>
-            <div id="about-content">about stuff here</div>
+            <div id="about-content">
+              <h3 class="sub-setting-heading">License</h3>
+              <div>
+                <h4 class="sub-sub-setting-heading">electron</h4>
+                <p>Copyright (c) 2013-2020 GitHub Inc.</p><br>
+
+                <p>
+                Permission is hereby granted, free of charge, to any person obtaining
+                a copy of this software and associated documentation files (the
+                "Software"), to deal in the Software without restriction, including
+                without limitation the rights to use, copy, modify, merge, publish,
+                distribute, sublicense, and/or sell copies of the Software, and to
+                permit persons to whom the Software is furnished to do so, subject to
+                the following conditions:
+                </p>
+                <br>
+                <hr>
+                <h4 class="sub-sub-setting-heading">Icons8</h4>
+                <p>All icons in this application are downloaded from Icon8.</p>
+                <p>https://icons8.com</p>
+                <br>
+                <hr>
+
+                <h4 class="sub-sub-setting-heading">body-parser</h4>
+                <p>(The MIT License)</p>
+                <br>
+                <p>
+                  Copyright (c) 2014 Jonathan Ong <me@jongleberry.com><br>
+                  Copyright (c) 2014-2015 Douglas Christopher Wilson <doug@somethingdoug.com><br>
+                </p>
+                <br>
+                <p>
+                  Permission is hereby granted, free of charge, to any person obtaining
+                  a copy of this software and associated documentation files (the
+                  'Software'), to deal in the Software without restriction, including
+                  without limitation the rights to use, copy, modify, merge, publish,
+                  distribute, sublicense, and/or sell copies of the Software, and to
+                  permit persons to whom the Software is furnished to do so, subject to
+                  the following conditions:
+                </p>
+                <br>
+                <hr>
+                <h4 class="sub-sub-setting-heading">express</h4>
+                <p>(The MIT License)</p>
+                <br>
+                <p>
+                  Copyright (c) 2009-2014 TJ Holowaychuk <tj@vision-media.ca><br>
+                Copyright (c) 2013-2014 Roman Shtylman <shtylman+expressjs@gmail.com><br>
+                Copyright (c) 2014-2015 Douglas Christopher Wilson <doug@somethingdoug.com><br>
+                </p>
+                <br>
+                <p>
+                Permission is hereby granted, free of charge, to any person obtaining
+                a copy of this software and associated documentation files (the
+                'Software'), to deal in the Software without restriction, including
+                without limitation the rights to use, copy, modify, merge, publish,
+                distribute, sublicense, and/or sell copies of the Software, and to
+                permit persons to whom the Software is furnished to do so, subject to
+                the following conditions:
+                </p>
+                <br>
+                <hr>
+                <h4 class="sub-sub-setting-heading">jQuery</h4>
+                <p>Copright OpenJS Foundation and other contributors, https://openjsf.org/</p><br>
+
+                <p>Permission is hereby granted, free of charge, to any person obtaining
+                a copy of this software and associated documentation files (the
+                "Software"), to deal in the Software without restriction, including
+                without limitation the rights to use, copy, modify, merge, publish,
+                distribute, sublicense, and/or sell copies of the Software, and to
+                permit persons to whom the Software is furnished to do so, subject to
+                  the following conditions:</p><br>
+                <br>
+                <hr>
+                <h4 class="sub-sub-setting-heading">node</h4>
+                <p>
+                  Node.js is licensed for use as follows:
+                </p>
+                <br>
+                <p>
+                  Copyright Node.js contributors. All rights reserved.
+                </p>
+                <br>
+                <p>
+                  Permission is hereby granted, free of charge, to any person obtaining a copy
+                  of this software and associated documentation files (the "Software"), to
+                  deal in the Software without restriction, including without limitation the
+                  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+                  sell copies of the Software, and to permit persons to whom the Software is
+                  furnished to do so, subject to the following conditions:
+                </p>
+                <br>
+                <hr>
+            </div>
           </div>
         </div>
 
     </div>
 
     <script>window.$ = window.jQuery = require("jquery");</script>
-    <script src="js/jquery_ui/jquery-ui.min.js"></script>
-    <script src="js/color_picker.js"></script>
+    <script src="js/appearance_settings.js"></script>
     <script src="js/settings_menu.js"></script>
     <script src="js/custom_functions.js"></script>
     <script src="db/initialize_db.js"></script>

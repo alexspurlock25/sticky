@@ -97,7 +97,7 @@ button:hover {
   cursor: pointer;
 }
 #cancel-edit-btn:hover {
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid var(--main-bg-color);
   color: black;
   background-color: white;
 }
@@ -220,7 +220,7 @@ td {
   width: 40px;
 }
 #form-container button:hover {
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid var(--main-bg-color);
   color: black;
   background-color: white;
 }
@@ -233,6 +233,6 @@ td {
 }
 #filters button:hover {
   background-color: white;
-  color: var(--main-bg-color);
-  border-bottom: 1px solid black;
+  color: black;
+  border-bottom: 1px solid var(--main-bg-color);
 }

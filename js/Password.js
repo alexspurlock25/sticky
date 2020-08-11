@@ -49,8 +49,8 @@ class Password {
         if(this.password.match("^(?=.{5,})")) {
             passStrenRate++;
         }
-        // at least 8 characters
-        if(this.password.match("^(?=.{10,})")) {
+        // at least 12 characters
+        if(this.password.match("^(?=.{12,})")) {
             passStrenRate++;
         }
         

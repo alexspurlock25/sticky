@@ -178,13 +178,21 @@ $("#cancel-edit-btn").click( function () {
 // LOAD ALL ROWS from database after successful ajax call
 function loadAllRows(rows) {
 
+    var type = "";
+
+    if(settings.getSync("hide-show-password.visible")) {
+        type = "text";
+    } else {
+        type = "password";
+    }
+
     rows.forEach( (row) => {
 
         let htmlTableRow = "<tr id='row-" + row.infoid + "'>"
             + "<td id='td-url'>" + row.url + "</td>"
             + "<td id='td-username'>" + row.username + "</td>"
             + "<td id='td-email'>" + row.email + "</td>"
-            + "<td id='td-password'><input class='row-password-input' id='row-" + row.infoid+ "-password-inpt' type='password' value='" + row.password + "' readonly/><button id='row-hide-show-btn' value='" + row.infoid+ "' type='button' onclick='row_ShowPassword(this)' ><img src='./images/show_icon.png'></button></td>"
+            + "<td id='td-password'><input class='row-password-input' id='row-" + row.infoid+ "-password-inpt' type='"+type+"' value='" + row.password + "' readonly/><button id='row-hide-show-btn' value='" + row.infoid+ "' type='button' onclick='row_ShowPassword(this)' ><img src='./images/show_icon.png'></button></td>"
             + "<td id='td-pass-stren-graded'>" + row.pass_strength_interpretation + "</td>"
             + "<td><button value='"+ row.infoid +"' id='edit-btn-row' onclick='editRow(this)'><img alt='Edit' src='./images/edit_icon.png'/></button><button value='"+ row.infoid +"' id='delete-btn-row' onclick='deleteRow(this)'><img alt='Delete' src='./images/delete_icon.png'/></button></td>"
             + "</tr>";
@@ -197,11 +205,19 @@ function loadAllRows(rows) {
 // ADD ROW to database table after successful ajax call
 function addRow(row) {
 
+    var type = "";
+
+    if(settings.getSync("hide-show-password.visible")) {
+        type = "text";
+    } else {
+        type = "password";
+    }
+
     let htmlTableRow = "<tr id='row-" + row.infoid + "'>"
         + "<td id='td-url'>" + row.url + "</td>"
         + "<td id='td-username'>" + row.username + "</td>"
         + "<td id='td-email'>" + row.email + "</td>"
-        + "<td id='td-password'><input class='row-password-input' id='row-" + row.infoid+ "-password-inpt' type='password' value='" + row.password + "' readonly/><button id='row-hide-show-btn' value='" + row.infoid+ "' type='button' onclick='row_ShowPassword(this)' ><img src='./images/show_icon.png'></button></td>"
+        + "<td id='td-password'><input class='row-password-input' id='row-" + row.infoid+ "-password-inpt' type='"+type+"' value='" + row.password + "' readonly/><button id='row-hide-show-btn' value='" + row.infoid+ "' type='button' onclick='row_ShowPassword(this)' ><img src='./images/show_icon.png'></button></td>"
         + "<td id='td-pass-stren-graded'>" + row.pass_strength_interpretation + "</td>"
         + "<td><button value='"+ row.infoid +"' id='edit-btn-row' onclick='editRow(this)'><img alt='Edit' src='./images/edit_icon.png'/></button><button value='"+ row.row_id +"' id='delete-btn-row' onclick='deleteRow(this)'><img alt='Delete' src='./images/delete_icon.png'/></button></td>"
         + "</tr>";
