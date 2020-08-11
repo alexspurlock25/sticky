@@ -9,7 +9,6 @@ app.on("ready", function () {
         width: 1200,
         width: 1200,
         minWidth: 840,
-        maxWidth: 1600,
         height: 1200,
         show: false,
         webPreferences: {

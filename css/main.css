@@ -89,9 +89,6 @@ table input {
   font-size: 13pt;
   border: none;
 }
-#td-password {
-  /*display: flex;*/
-}
 button:hover {
   border-bottom: 1px solid var(--main-bg-color);
   cursor: pointer;
@@ -116,7 +113,7 @@ table {
   border-radius: 5px;
   overflow: hidden;
   width: 98%;
-  max-width: 1300px;
+  max-width: 1700px;
 }
 #edit-btn-row, #delete-btn-row {
   background-color: white;
