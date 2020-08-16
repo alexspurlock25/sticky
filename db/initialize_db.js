@@ -4,17 +4,6 @@ let path = require("path")
 // db connection... in this case, it's local
 let db_conn = new sqlite3.Database(path.join(__dirname, "/db/user_database.sql"))
 
-/*
-COLUMNS:
-  infoid - primary key
-  url - not null
-  username
-  email
-  password
-  date
-  pass_strength_numeric
-  pass_strength_interpretation
-*/
 // Create table if it doesn't exists.
 db_conn.serialize(function(err) {
   db_conn.run(
@@ -30,7 +19,7 @@ db_conn.serialize(function(err) {
   );
 
     if (err) {
-        console.log("INITIALIZING PROBLEM\nERROR: " + err.message)
+        console.log(err.message)
     }
 
     // close conn

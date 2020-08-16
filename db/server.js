@@ -10,15 +10,12 @@ let app = express()
 // import get/post functions
 let userData = require("./tables/user_data")
 
-
 app.use(body_parser.urlencoded({extended: true }))
 
 // get all rows
 app.get("/get-all-rows", function(req, res) {
     userData.getAllRows().then( function(response) {
         res.json(response)
-    }).catch( function (err) {
-        console.error("ERROR with server. Failed to get all rows.\n" + err.message)
     })
 })
 
@@ -26,8 +23,6 @@ app.get("/get-all-rows", function(req, res) {
 app.get("/sort-date-desc", function(req, res) {
     userData.sortDateDESC().then( function(response) {
         res.json(response)
-    }).catch( function () {
-
     })
 })
 
@@ -35,8 +30,6 @@ app.get("/sort-date-desc", function(req, res) {
 app.get("/sort-date-asc", function(req, res) {
     userData.sortDateASC().then( function(response) {
         res.json(response)
-    }).catch( function () {
-
     })
 })
 
@@ -44,8 +37,6 @@ app.get("/sort-date-asc", function(req, res) {
 app.get("/sort-title-alpha-desc", function(req, res) {
     userData.sortTitleAlphaDESC().then( function(response) {
         res.json(response)
-    }).catch( function () {
-
     })
 })
 
@@ -53,8 +44,6 @@ app.get("/sort-title-alpha-desc", function(req, res) {
 app.get("/sort-title-alpha-asc", function(req, res) {
     userData.sortTitleAlphaASC().then( function(response) {
         res.json(response)
-    }).catch( function () {
-
     })
 })
 
@@ -76,17 +65,14 @@ app.get("/sort-pass-sec-desc", function(req, res) {
 app.post("/add-row", function (req, res) {
     userData.addAccount(req.body).then( function(response) {
         res.json(response)
-    }).catch(function () {
-
     })
 })
 
 // delete one row from database table
 app.post("/delete-row", function (req, res) {
-    userData.removeAccount(req.body.infoid).then( function (rowid) {
-        res.json(rowid)
-    }).catch( function () {
-
+    console.log("server "+req.body.infoid)
+    userData.removeAccount(req.body.infoid).then( function (response) {
+        res.json(response)
     })
 })
 

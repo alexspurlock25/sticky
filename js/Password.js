@@ -1,5 +1,6 @@
 "use strict";
 
+// Class for password related ops
 class Password {
     #password;
     constructor(pass) {

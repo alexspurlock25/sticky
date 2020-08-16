@@ -1,8 +1,8 @@
 // file to handle all my get/post requests
 
-let sqlite3 = require("sqlite3").verbose()
-let path = require("path")
-let Password = require("../../js/Password")
+let sqlite3 = require("sqlite3").verbose();
+let path = require("path");
+let Password = require("../../js/Password");
 
 
 // get all rows from db table
@@ -223,7 +223,7 @@ module.exports.removeAccount = function (row_id) {
             db_conn.run("DELETE FROM tUserData WHERE infoid=(?)", [row_id], function (err) {
 
                 if(!err) {
-                    resolve(row_id)
+                    resolve({ infoid: row_id })
                 } else {
                     reject(err)
                 }
@@ -285,19 +285,19 @@ module.exports.updateAccount = function (data) {
 }
 
 // quick function to grade a numerically graded password
-function gradePassword(pass){
+function gradePassword(numericGrade){
     let grade = "";
     
-    if (pass === 0) {
+    if (numericGrade === 0) {
         grade = "N/A";
     }
-    if (pass > 0 && pass < 4) {
+    if (numericGrade > 0 && numericGrade < 4) {
         grade = "Low";
     }
-    if (pass >= 4 && pass < 7) {
+    if (numericGrade >= 4 && numericGrade < 7) {
         grade = "Medium";
     }
-    if (pass >= 7 && pass <= 10) {
+    if (numericGrade >= 7 && numericGrade <= 10) {
         grade = "High";
     }
 

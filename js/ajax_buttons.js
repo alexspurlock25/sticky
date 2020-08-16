@@ -1,30 +1,17 @@
+var Ajax = require("./js/Ajax");
 var row_id = 0;
-let hide_duration = 200;
-let show_duration = 200;
+var hide_duration = 200;
+var show_duration = 200;
 
 $(document).ready( function () {
 
-    $("#settings-menu").hide();
-    $("#add-form").hide();
-    $("#edit-form").hide();
-    $("#filters").hide();
-
-    $.ajax({ 
-        method: "GET",
-        url: "http://localhost:3000/get-all-rows",
-        success: function (response) {
-
-            loadAllRows(response)
-            
-            $("tbody td:nth-child(5)").hide()
-            $("thead th:nth-child(5)").hide()
-            $("tbody td:last-child").hide()
-            $("thead th:last-child").hide()
-        },
-        error: function(){
-            console.log("Error: Failed to load data.")
-        }
-    })
+    Ajax.get("http://localhost:3000/get-all-rows").then(data => {
+        loadAllRows(data);
+        $("tbody td:nth-child(5)").hide()
+        $("thead th:nth-child(5)").hide()
+        $("tbody td:last-child").hide()
+        $("thead th:last-child").hide()
+    });
 })
 
 $("#add-btn-menu").click( function () {
@@ -253,7 +240,8 @@ function editRow(clicked_row) {
 // DELETE ROW function that deletes a row from database using ajax
 function deleteRow(clicked_button){
 
-    let button_value = $(clicked_button).attr("value")
+    let button_value = $(clicked_button).attr("value");
+
     $.ajax({
         method: "POST",
         cache: false,
@@ -261,8 +249,8 @@ function deleteRow(clicked_button){
         data: {
             infoid: button_value
         },
-        success: function(callback_rowid) {
-            $("#row-" + callback_rowid).remove()
+        success: function(response) {
+            $("#row-" + response.infoid).remove();
             console.log("Row Deleted.")
         },
         error: function() {
