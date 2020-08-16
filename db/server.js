@@ -8,9 +8,10 @@ let body_parser = require("body-parser")
 let app = express()
 
 // import get/post functions
-let userData = require("./tables/user_data")
+let userData = require("./tables/user_data");
 
-app.use(body_parser.urlencoded({extended: true }))
+app.use(body_parser.urlencoded({extended: true }));
+app.use(body_parser.json());
 
 // get all rows
 app.get("/get-all-rows", function(req, res) {
@@ -70,7 +71,6 @@ app.post("/add-row", function (req, res) {
 
 // delete one row from database table
 app.post("/delete-row", function (req, res) {
-    console.log("server "+req.body.infoid)
     userData.removeAccount(req.body.infoid).then( function (response) {
         res.json(response)
     })
@@ -78,12 +78,11 @@ app.post("/delete-row", function (req, res) {
 
 // update one row in database table
 app.post("/update-row", function(req, res) {
-    userData.updateAccount(req.body).then( function(updated_row) {
-        res.json(updated_row)
+    userData.updateAccount(req.body).then( function(response) {
+        res.json(response)
     } )
 })
 
 app.listen(portNumber, function () {
-
     console.log("PORT OPEN: " + portNumber);
 })

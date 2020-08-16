@@ -2,7 +2,6 @@ var Ajax = require("./js/Ajax");
 
 // Class for any sorting ops
 class Sort {
-
     // method to get the TYPE of an input. Password or Text
     getInputType() {
         let type = "";
@@ -131,18 +130,18 @@ $("#filter-recent").on("click", toggleTwoFunctions (  function() {
     new Sort().byDateDesc()
 }, function() {
     new Sort().byDateASC()
-}))
+}));
 
 // toggle between sort by title functions
 $("#filter-a-z").on("click", toggleTwoFunctions( function() {
     new Sort().byTitleAlphaDESC()
 }, function() {
     new Sort().byTitleAlphaASC()
-}))
+}));
 
 // toggle between password grade functions
 $("#filer-security").on("click", toggleTwoFunctions( function() {
     new Sort().byPassSecurityDESC()
 }, function() {
     new Sort().byPassSecurityASC()
-}))
+}));

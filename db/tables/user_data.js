@@ -167,7 +167,6 @@ module.exports.sortPassSecurityDESC = function () {
 
 // add one account to database table
 module.exports.addAccount = function (data) {
-    
     // new Password object
     const pass = new Password(data.password)
 
@@ -176,7 +175,7 @@ module.exports.addAccount = function (data) {
     let interpGrade = gradePassword(numericGrade)
 
     // database connection. In this case, local file
-    const db_conn = new sqlite3.Database( path.join(__dirname, "../user_database.sql") )
+    const db_conn = new sqlite3.Database( path.join(__dirname, "../user_database.sql") );
 
     return new Promise( function (resolve, reject) {
 
@@ -243,13 +242,13 @@ module.exports.updateAccount = function (data) {
     let db_conn = new sqlite3.Database(path.join (__dirname, "../user_database.sql"))
     return new Promise( function (resolve, reject) {
 
+
         // new Password object
         const pass = new Password(data.password)
 
         // grade provided password
         let numericGrade = pass.numericPasswordRate
         let interpGrade = gradePassword(numericGrade)
-        console.log(interpGrade)
 
         let infoid = data.infoid
         let url = data.url
@@ -259,7 +258,7 @@ module.exports.updateAccount = function (data) {
 
         db_conn.serialize(function() {
             db_conn.run("UPDATE tUserData SET url=(?), username=(?), email=(?), password=(?), pass_strength_numeric=(?), pass_strength_interpretation=(?) WHERE infoid=(?);", 
-            [url, username, email, password,numericGrade, interpGrade, infoid], function (err) {
+            [url, username, email, password, numericGrade, interpGrade, infoid], function (err) {
 
                 if(!err) {
                     

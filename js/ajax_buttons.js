@@ -4,20 +4,16 @@ var hide_duration = 200;
 var show_duration = 200;
 
 $(document).ready( function () {
-
     Ajax.get("http://localhost:3000/get-all-rows").then(data => {
         loadAllRows(data);
-        $("tbody td:nth-child(5)").hide()
-        $("thead th:nth-child(5)").hide()
-        $("tbody td:last-child").hide()
-        $("thead th:last-child").hide()
+        hidePassGradeCol();
+        hideActionButtonsCol();
     });
 })
 
 $("#add-btn-menu").click( function () {
-    
-    $("tbody td:nth-child(5)").hide()
-    $("thead th:nth-child(5)").hide()
+
+    hidePassGradeCol();
 
     $("#menu-container").hide(hide_duration)
     $("table").hide(hide_duration)
@@ -30,8 +26,7 @@ $("#edit-btn-menu").click( function () {
 
     $("#menu-container").hide(hide_duration);
 
-    $("tbody td:nth-child(5)").hide();
-    $("thead th:nth-child(5)").hide();
+    hidePassGradeCol();
     $("thead th:last-child").show(show_duration);
     $("tbody td:last-child").show(show_duration);
     $("#filters").hide(hide_duration);
@@ -43,52 +38,8 @@ $("#edit-btn-menu").click( function () {
 })
 
 $("#filter-btn-menu").click( function () {
-    $("tbody td:nth-child(5)").hide(hide_duration)
-    $("thead th:nth-child(5)").hide(hide_duration)
+    hidePassGradeCol(hide_duration);
     $("#filters").toggle(hide_duration)
-})
-
-// EDIT FORM SUBMIT function that interacts with database using ajax
-$("#edit-form").submit( function(e) {
-    e.preventDefault()
-
-    let url = $("#edit-txtbx-url").val()
-    let username = $("#edit-txtbx-username").val()
-    let email = $("#edit-txtbx-email").val()
-    let password = $("#edit-txtbx-password").val()
-
-    $.ajax({
-        method: "POST",
-        url: "http://localhost:3000/update-row",
-        data: {
-            infoid: row_id,
-            url: url,
-            username: username,
-            email: email,
-            password: password
-        },
-        success: function (response) {
-
-            $("#row-" + response.infoid + " #td-url").text(response.url)
-            $("#row-" + response.infoid + " #td-username").text(response.username)
-            $("#row-" + response.infoid + " #td-email").text(response.email)
-            $("#row-" + response.infoid + " #td-password input").attr("value", response.password)
-            $("#row-" + response.infoid + " #td-pass-stren-graded").text(response.pass_strength_interpretation)
-
-            console.log("Row updated.")
-        },
-        error: function(){
-            console.log("Error: Failed to load data.")
-        }
-    })
-
-    $("tbody td:nth-child(5)").hide(hide_duration)
-    $("thead th:nth-child(5)").hide(hide_duration)
-
-    $("#edit-form").hide(hide_duration).trigger("reset")
-    $("table").show(show_duration)
-    $("#menu-container").show(show_duration)
-
 })
 
 // ADD FORM SUBMIT function that interacts with database using ajax
@@ -100,29 +51,54 @@ $("#add-form").submit( function (e) {
     let email = $("#add-txtbx-email").val()
     let password = $("#add-txtbx-password").val()
 
-    $.ajax({
-        method: "POST",
-        cache: false,
-        url: "http://localhost:3000/add-row",
-        data: {
-            url: url,
-            username: username,
-            email: email,
-            password: password
-        },
-        success: function(response) {
-            addRow(response)
-            $("tbody td:nth-child(5)").hide()
-            $("thead th:nth-child(5)").hide()
-            $("tbody td:last-child").hide()
-            $("thead th:last-child").hide()
-            console.log("Row Added.")
-        },
-        error: function(response) {
-            console.log("ERROR: Can't add row.")
-        }
-    })
+    let body = {
+        url: url,
+        username: username,
+        email: email,
+        password: password
+    }
+
+    Ajax.post("http://localhost:3000/add-row", body).then((response) => {
+        addRow(response);
+        hidePassGradeCol(hide_duration);
+        $("tbody td:last-child").hide();
+        $("thead th:last-child").hide();
+    });
+
     $("#add-form").hide(hide_duration).trigger("reset")
+    $("table").show(show_duration)
+    $("#menu-container").show(show_duration)
+
+})
+
+// EDIT FORM SUBMIT function that interacts with database using ajax
+$("#edit-form").submit( function(e) {
+    e.preventDefault()
+
+    let url = $("#edit-txtbx-url").val()
+    let username = $("#edit-txtbx-username").val()
+    let email = $("#edit-txtbx-email").val()
+    let password = $("#edit-txtbx-password").val()
+
+    let body = {
+        infoid: row_id,
+        url: url,
+        username: username,
+        email: email,
+        password: password
+    }
+
+    Ajax.post("http://localhost:3000/update-row", body).then((response) => {
+        $("#row-" + response.infoid + " #td-url").text(response.url);
+        $("#row-" + response.infoid + " #td-username").text(response.username);
+        $("#row-" + response.infoid + " #td-email").text(response.email);
+        $("#row-" + response.infoid + " #td-password input").attr("value", response.password);
+        $("#row-" + response.infoid + " #td-pass-stren-graded").text(response.pass_strength_interpretation);
+    });
+
+    hidePassGradeCol(hide_duration);
+
+    $("#edit-form").hide(hide_duration).trigger("reset")
     $("table").show(show_duration)
     $("#menu-container").show(show_duration)
 
@@ -270,4 +246,23 @@ function row_ShowPassword(clicked_button) {
     } else {
         $("#row-"+button_value+"-password-inpt").attr("type", "password")
     }
+}
+
+// method to hide column with the action buttons. Edit and Delete buttons. Default hiding speed is 0.
+function hideActionButtonsCol(hide_speed=0) {
+    $("tbody td:last-child").hide(hide_speed);
+    $("thead th:last-child").hide(hide_speed);
+}
+// method to hide column with the Password Grades. Default hiding speed is 0.
+function hidePassGradeCol(hide_speed=0) {
+    hide_speed = 0;
+    // check if Password Grade column is visible
+    if ($("thead th:nth-child(5)").is(":visible")) {
+        // if true, make hiding speed is slowing. For a better user experience
+        hide_speed = 200;
+    }
+
+    // hide
+    $("thead th:nth-child(5)").hide(hide_speed);
+    $("tbody td:nth-child(5)").hide(hide_speed);
 }
