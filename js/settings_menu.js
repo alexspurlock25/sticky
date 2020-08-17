@@ -1,10 +1,6 @@
-let settings = require("electron-settings")
+var show_duration = 200;
 
 $(document).ready( function () {
-
-    $("#general-content").hide()
-    $("#about-content").hide()
-
 
     $("#settings-btn-menu").click( function () {
 
