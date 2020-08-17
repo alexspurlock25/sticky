@@ -86,8 +86,8 @@ class Table {
     appendRowToHtmlTable(row) {
         // get input TYPE from settings
         let type = passwordSettings.passwordVisibility;
-
-        let htmlTableRow = "<tr id='row-" + row.infoid + "'>"
+//<button value='"+ row.infoid +"' id='edit-btn-row' class='edit-btn-row' onclick='editRow(this)'><img alt='Edit' src='./images/edit_icon.png'/></button>
+        let htmlTableRow = "<tr id='row-" + row.infoid + "' class='"+row.infoid+"'>"
             + "<td id='td-url'>" + row.url + "</td>"
             + "<td id='td-username'>" + row.username + "</td>"
             + "<td id='td-email'>" + row.email + "</td>"

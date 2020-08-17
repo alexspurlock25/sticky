@@ -9,6 +9,7 @@ $(document).ready(function(){
 
     })
 
+    // SHOW/HIDE password inside Add Form
     $("#add-hide-show-btn").on("click", function () {
 
         if($("#add-txtbx-password").attr("type") === "password") {
@@ -20,6 +21,7 @@ $(document).ready(function(){
         }
     });
 
+    // SHOW/HIDE password inside Edit Form
     $("#edit-hide-show-btn").on("click", function () {
 
         if($("#edit-txtbx-password").attr("type") === "password") {

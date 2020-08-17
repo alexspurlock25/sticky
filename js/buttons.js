@@ -69,6 +69,7 @@ $("#edit-form-cancel-btn").click( function () {
 
 // CANCEL EDIT BUTTON that is inside the table head.
 $("#cancel-edit-btn").click( function () {
+
     $("#edit-form").hide(hide_duration).trigger("reset")
 
     $("#menu-container").show(show_duration)
@@ -126,11 +127,10 @@ $("#edit-form").submit( function(e) {
     $("#wrapper").show(show_duration);
     $("#menu-container").show(show_duration);
 
-})
+});
 
 // EDIT ROW function that simply takes fills out #edit-form when button is clicked inside that row
 function editRow(clicked_row) {
-
     table.hideActionButtonsCol(hide_duration);
 
     row_num = $(clicked_row).attr("value");

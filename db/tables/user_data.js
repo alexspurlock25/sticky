@@ -1,8 +1,10 @@
 // file to handle all my get/post requests
 
-let sqlite3 = require("sqlite3").verbose();
-let path = require("path");
-let Password = require("../../js/Password");
+var sqlite3 = require("sqlite3").verbose();
+var path = require("path");
+var cipher = require("");
+
+var Password = require("../../js/Password");
 
 
 // get all rows from db table
