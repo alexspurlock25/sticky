@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "dist": "electron-builder"
+    "dist": "electron-builder build",
+    "publish": "electron-builder build --win --publish always"
   },
   "repository": {
     "type": "git",
@@ -38,16 +39,24 @@
         }
       ]
     },
-    "appId": "sticky",
+    "mac": {
+      "target": "dmg"
+    },
+    "appId": "com.sticky",
     "productName": "Sticky",
     "icon": "./images/app_icon.ico",
     "directories": {
       "output": "build"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": true,
+      "runAfterFinish": false
+    },
+    "dmg": {
+
     }
-  },
-  "nsis": {
-    "oneClick": false,
-    "perMachine": false,
-    "allowToChangeInstallationDirectory": true
   }
 }

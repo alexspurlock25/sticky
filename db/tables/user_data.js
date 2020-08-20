@@ -1,16 +1,16 @@
 // file to handle all my get/post requests
 
 var sqlite3 = require("sqlite3").verbose();
-const {app} = require("electron");
-var path = require("path");
+const path = require("path");
+const { app } = require("electron");
 
 var Password = require("../../js/Password");
 const db_file = path.join(app.getPath("userData"), "db", "user_database.sql");
 
-
 // get all rows from db table
 module.exports.getAllRows = function () {
     // local db connection
+    // const db_file = path.join(app.getPath("userData"), "db", "user_database.sql");
     let db_conn = new sqlite3.Database(db_file);
     return new Promise( function (resolve, reject) {
 

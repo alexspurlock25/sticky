@@ -1,10 +1,19 @@
-const { app, BrowserWindow, remote } = require("electron");
-const sqlite3 = require("sqlite3").verbose();
+const { app, BrowserWindow } = require("electron");
+const sqlite3 = require("sqlite3");
 const path = require("path");
 const fs = require("fs");
+const { file } = require("electron-settings");
+
 
 // function to create the main window of the app
 function createMainWindow() {
+
+    let db_path = path.join(app.getPath("userData"), "db", "user_database.sql");
+
+    if( !(isDirectory(db_path))) {
+        createFile(db_path);
+        createDBTable(db_path);
+    }
 
     // new object of BrowserWindow, with options
     const mainWindow = new BrowserWindow({
@@ -18,9 +27,9 @@ function createMainWindow() {
 
     mainWindow.loadURL(path.join(__dirname, "index.html"));
     // mainWindow.webContents.openDevTools();
-    // mainWindow.removeMenu();
-    
-    const server = require(path.join(__dirname, "db/server"));
+    mainWindow.removeMenu();
+
+    const server = require(path.join(__dirname, "./db/server"));
     
 }
 
@@ -41,38 +50,37 @@ app.on("activate", () => {
     }
 });
 
-app.on("ready", function() {
+app.whenReady().then(createMainWindow);
 
-    const db_folder = path.join(app.getPath("userData"), "db");
-    createDBFile(db_folder, "user_database.sql");
+// BELOW are a couple of functions that deal with db file and table creation
 
-    //location (windows): C:/Users/<USER>/AppData/Roaming/sticky/db/user_database.sql
-    const db_file = path.join(app.getPath("userData"), "db", "user_database.sql");
-    createDBTable(db_file);
 
-});
+// function that check if a dir is there or not
+function isDirectory(dir) {
+
+    if(fs.existsSync(dir)) {
+        return true;
+    }
+    return false;
+}  
 
 // function to create db file
-function createDBFile(folder_location, file_name){
-    
-    fs.stat(folder_location, function(err, stats) {
-        if(err) {
-            fs.mkdir(folder_location, { recursive: true}, function(err) {
-                if(err) { throw err; }
-            });
-            fs.writeFile(path.join(folder_location, file_name), "", function(err) {
-                if(err) { throw err; }
-            });
-        }
+function createFile(file_path){
+
+    fs.mkdir(path.join(file_path, ".."), { recursive: true}, function(err) {
+            if(err) { throw err; }
+    });
+    fs.writeFile(file_path, "", function(err) {
+            if(err) { throw err; }
     });
 
 }
 
 // function to create db table if it doesn't exist
-function createDBTable(db_file_location) {
+function createDBTable(connection) {
     
     // db connection... in this case, it's local
-    let db_conn = new sqlite3.Database(db_file_location);
+    let db_conn = new sqlite3.Database(connection);
 
     // Create table if it doesn't exists.
     db_conn.serialize(function(err) {
@@ -89,13 +97,12 @@ function createDBTable(db_file_location) {
         );
 
         if (err) {
-            console.log(err.message)
+            console.log(err.message);
         }
 
         // close conn
-        db_conn.close()
+        db_conn.close();
 
     });
 
 }
-app.whenReady().then(createMainWindow);
