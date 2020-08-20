@@ -5,9 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron-forge start",
-    "package": "electron-forge package",
-    "make": "electron-forge make"
+    "start": "electron .",
+    "dist": "electron-builder"
   },
   "repository": {
     "type": "git",
@@ -20,51 +19,35 @@
   },
   "homepage": "https://github.com/alexspurlock25/sticky#readme",
   "devDependencies": {
-    "@electron-forge/cli": "^6.0.0-beta.52",
-    "@electron-forge/maker-deb": "^6.0.0-beta.52",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.52",
-    "@electron-forge/maker-squirrel": "^6.0.0-beta.52",
-    "@electron-forge/maker-zip": "^6.0.0-beta.52",
-    "electron": "^9.1.1",
-    "electron-rebuild": "^1.11.0",
-    "electron-winstaller": "^4.0.1"
+    "electron": "^9.2.0",
+    "electron-builder": "^22.8.0"
   },
   "dependencies": {
-    "@deckdeckgo/color": "^2.1.3",
-    "@trodi/electron-splashscreen": "^1.0.0",
     "body-parser": "^1.19.0",
     "electron-settings": "^4.0.2",
-    "electron-squirrel-startup": "^1.0.0",
     "express": "^4.17.1",
     "jquery": "^3.5.1",
-    "sqlite-cipher": "^0.3.6",
     "sqlite3": "^5.0.0"
   },
-  "config": {
-    "forge": {
-      "packagerConfig": {},
-      "makers": [
+  "build": {
+    "win": {
+      "target": [
         {
-          "name": "@electron-forge/maker-squirrel",
-          "config": {
-            "name": "sticky"
-          }
-        },
-        {
-          "name": "@electron-forge/maker-zip",
-          "platforms": [
-            "darwin"
-          ]
-        },
-        {
-          "name": "@electron-forge/maker-deb",
-          "config": {}
-        },
-        {
-          "name": "@electron-forge/maker-rpm",
-          "config": {}
+          "target": "nsis",
+          "arch": "x64"
         }
       ]
+    },
+    "appId": "sticky",
+    "productName": "Sticky",
+    "icon": "./images/app_icon.ico",
+    "directories": {
+      "output": "build"
     }
+  },
+  "nsis": {
+    "oneClick": false,
+    "perMachine": false,
+    "allowToChangeInstallationDirectory": true
   }
 }

@@ -1,16 +1,17 @@
 // file to handle all my get/post requests
 
 var sqlite3 = require("sqlite3").verbose();
+const {app} = require("electron");
 var path = require("path");
-var cipher = require("");
 
 var Password = require("../../js/Password");
+const db_file = path.join(app.getPath("userData"), "db", "user_database.sql");
 
 
 // get all rows from db table
 module.exports.getAllRows = function () {
     // local db connection
-    let db_conn = new sqlite3.Database(path.join (__dirname, "../user_database.sql"))
+    let db_conn = new sqlite3.Database(db_file);
     return new Promise( function (resolve, reject) {
 
         db_conn.serialize( function() {
@@ -32,7 +33,7 @@ module.exports.getAllRows = function () {
 // return rows in desc order of the date
 module.exports.sortDateDESC = function () {
     // local db connection
-    let db_conn = new sqlite3.Database(path.join (__dirname, "../user_database.sql"))
+    let db_conn = new sqlite3.Database(db_file);
     return new Promise( function (resolve, reject) {
 
         db_conn.serialize( function() {
@@ -54,7 +55,7 @@ module.exports.sortDateDESC = function () {
 // return rows in asc order of the date
 module.exports.sortDateASC = function () {
     // local db connection
-    let db_conn = new sqlite3.Database(path.join (__dirname, "../user_database.sql"))
+    let db_conn = new sqlite3.Database(db_file);
     return new Promise( function (resolve, reject) {
 
         db_conn.serialize( function() {
@@ -76,7 +77,7 @@ module.exports.sortDateASC = function () {
 // return rows in desc order of the title
 module.exports.sortTitleAlphaDESC = function () {
 
-    let db = new sqlite3.Database(path.join (__dirname, "../user_database.sql"))
+    let db = new sqlite3.Database(db_file);
     return new Promise( function (resolve, reject) {
 
         db.serialize( function() {
@@ -99,7 +100,7 @@ module.exports.sortTitleAlphaDESC = function () {
 // return rows in asc order of the title
 module.exports.sortTitleAlphaASC = function () {
 
-    let db_conn = new sqlite3.Database(path.join (__dirname, "../user_database.sql"))
+    let db_conn = new sqlite3.Database(db_file);
     return new Promise( function (resolve, reject) {
 
         db_conn.serialize( function() {
@@ -123,7 +124,7 @@ module.exports.sortTitleAlphaASC = function () {
 module.exports.sortPassSecurityASC = function () {
 
     // local db connection
-    let db_conn = new sqlite3.Database(path.join (__dirname, "../user_database.sql"))
+    let db_conn = new sqlite3.Database(db_file);
     return new Promise( function (resolve, reject) {
 
         db_conn.serialize( function() {
@@ -147,7 +148,7 @@ module.exports.sortPassSecurityASC = function () {
 module.exports.sortPassSecurityDESC = function () {
 
     // local db connection
-    let db_conn = new sqlite3.Database(path.join (__dirname, "../user_database.sql"))
+    let db_conn = new sqlite3.Database(db_file);
     return new Promise( function (resolve, reject) {
 
         db_conn.serialize( function() {
@@ -177,7 +178,7 @@ module.exports.addAccount = function (data) {
     let interpGrade = gradePassword(numericGrade)
 
     // database connection. In this case, local file
-    const db_conn = new sqlite3.Database( path.join(__dirname, "../user_database.sql") );
+    const db_conn = new sqlite3.Database(db_file);
 
     return new Promise( function (resolve, reject) {
 
@@ -217,7 +218,7 @@ module.exports.addAccount = function (data) {
 // remove account from database table
 module.exports.removeAccount = function (row_id) {
 
-    let db_conn = new sqlite3.Database(path.join (__dirname, "../user_database.sql"))
+    let db_conn = new sqlite3.Database(db_file);
     return new Promise ( function (resolve, reject) {
 
         db_conn.serialize(function() {
@@ -241,7 +242,7 @@ module.exports.removeAccount = function (row_id) {
 // update one account in database table
 module.exports.updateAccount = function (data) {
 
-    let db_conn = new sqlite3.Database(path.join (__dirname, "../user_database.sql"))
+    let db_conn = new sqlite3.Database(db_file);
     return new Promise( function (resolve, reject) {
 
 
