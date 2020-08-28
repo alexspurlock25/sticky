@@ -55,8 +55,6 @@
       "deleteAppDataOnUninstall": true,
       "runAfterFinish": false
     },
-    "dmg": {
-
-    }
+    "dmg": {}
   }
 }
