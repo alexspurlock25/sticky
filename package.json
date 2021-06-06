@@ -20,15 +20,15 @@
   },
   "homepage": "https://github.com/alexspurlock25/sticky#readme",
   "devDependencies": {
-    "electron": "^9.3.1",
-    "electron-builder": "^22.8.0"
+    "electron": "^9.4.4",
+    "electron-builder": "^22.10.5"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
     "electron-settings": "^4.0.2",
     "express": "^4.17.1",
-    "jquery": "^3.5.1",
-    "sqlite3": "^5.0.0"
+    "jquery": "^3.6.0",
+    "sqlite3": "^5.0.2"
   },
   "build": {
     "win": {
