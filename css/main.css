@@ -1,31 +1,40 @@
+:root {
+  --main-bg-color: #1C2833;
+  --radius-primary: 4px;
+  --light-border: gainsboro;
+  --box-shadow: 0 1px 2px var(--light-border),
+                0 2px 4px var(--light-border),
+                0 4px 8px var(--light-border),
+                0 8px 16px var(--light-border),
+                0 16px 32px var(--light-border),
+                0 32px 64px var(--light-border);
+}
+
 * {
-  font-family: Candara, serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 *:focus {
   outline: none;
 }
-:root {
-  --main-bg-color: #1C2833;
-}
-#add-hide-show-btn, #edit-hide-show-btn {
-  width: 50px;
-  height: 50px;
-}
+
 input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration {
   -webkit-appearance:none;
 }
-#menu-container, #settings-menu-container {
+
+#menu-container, 
+#settings-menu-container {
   max-width: 1000px;
   margin: 0 auto 10px;
   width: 97%;
   height: 50px;
 }
+
 #left-side-menu {
   display: flex;
   align-items: center;
@@ -34,16 +43,16 @@ input[type="search"]::-webkit-search-results-decoration {
   float: left;
   height: 100%;
 }
+
 #search-bar {
-  background: url("../images/search_icon.png") no-repeat;
   width: 300px;
-  font-size: 16pt;
-  margin-left: 5px;
-  padding: 5px 5px 5px 35px;
+  padding: 10px;
   border: none;
-  border-bottom: 1px solid black;
+  border: 1px solid var(--light-border);
+  border-radius: var(--radius-primary);
   transition-duration: 300ms;
 }
+
 #right-side-menu {
   display: flex;
   align-items: center;
@@ -52,24 +61,27 @@ input[type="search"]::-webkit-search-results-decoration {
   height: 100%;
   float: right;
 }
-#menu-container button, #settings-menu-container button {
+
+#menu-container button, 
+#settings-menu-container button {
   background-color: white;
   margin: 1px;
   padding: 0;
   height: 40px;
   width: 40px;
 }
+
 button {
   background-color: var(--main-bg-color);
   color: white;
-  font-family: Candara, serif;
-  font-size: 13pt;
+  border-radius: var(--radius-primary);
   border: none;
   height: 30px;
   width: 100px;
   transition-duration: 400ms;
   margin: 0 9px;
 }
+
 table #row-hide-show-btn {
   vertical-align: middle;
   background-color: white;
@@ -79,103 +91,87 @@ table #row-hide-show-btn {
   padding: 0;
   margin: 1px;
 }
+
 table input {
-  width: 74%;
+  width: 60%;
   height: 100%;
   padding-left: 10px;
   display: flex;
   flex-direction: row;
   float: left;
-  font-size: 13pt;
   border: none;
 }
-button:hover {
-  border-bottom: 1px solid var(--main-bg-color);
-  cursor: pointer;
-}
-#cancel-edit-btn:hover {
-  border-bottom: 2px solid var(--main-bg-color);
-  color: black;
-  background-color: white;
-}
-/* TABLE */
 
 table {
   border-collapse: collapse;
   table-layout: fixed;
   margin: 10px auto;
-  box-shadow: 0 1px 2px gainsboro,
-  0 2px 4px gainsboro,
-  0 4px 8px gainsboro,
-  0 8px 16px gainsboro,
-  0 16px 32px gainsboro,
-  0 32px 64px gainsboro;
+  box-shadow: var(--box-shadow);
   border-radius: 5px;
   overflow: hidden;
   width: 98%;
   max-width: 1700px;
 }
-#edit-btn-row, #delete-btn-row {
+
+#edit-btn-row,
+#delete-btn-row {
   background-color: white;
   margin: 0 5px;
   display: inline-block;
   height: 100%;
   width: 50px;
 }
-tbody tr {
-  font-size: 14pt;
-}
+
 tbody tr:last-of-type {
   border-bottom: 3px solid var(--main-bg-color);
 }
+
 thead tr:last-of-type {
   box-shadow: none;
 }
+
 table thead {
   background-color: var(--main-bg-color);
   color: white;
-  font-family: Candara, serif;
-  font-size: 14pt;
 }
+
 thead tr {
   height: 30px;
 }
+
 tbody tr {
-  border-bottom: 1px solid gainsboro;
+  border-bottom: 1px solid var(--light-border);
 }
-th,td {
+
+th,
+td {
   padding: 15px;
   text-align: left;
 }
+
 th:last-child {
   display: flex;
   justify-content: center;
   background-color: white;
 }
+
 td:last-child{
   display: flex;
   justify-content: center;
 }
+
 td {
   height: 70px;
 }
-
-/* END TABLE */
-
-/* FORMS */
 
 #form-container {
   position: relative;
   top: 50px;
 }
+
 #form-container form {
   background-color: white;
-  box-shadow: 0 1px 2px gainsboro,
-  0 2px 4px gainsboro,
-  0 4px 8px gainsboro,
-  0 8px 16px gainsboro,
-  0 16px 32px gainsboro,
-  0 32px 64px gainsboro;
+  box-shadow: var(--box-shadow);
   height: 370px;
   width: 400px;
   left: 50%;
@@ -184,52 +180,39 @@ td {
   padding-top: 30px;
   border-radius: 4px;
   position: absolute;
-
 }
+
 #form-container input {
-  border-radius: 5px;
-  border: 1px solid gainsboro;
-  font-size: 15pt;
+  border-radius: var(--radius-primary);
+  border: 1px solid var(--light-border);
   padding-left: 5px;
   display: block;
   width: 300px;
   height: 40px;
   margin: 10px auto;
 }
-#form-container input:focus{
-  border: 1px solid var(--main-bg-color);
-}
+
 #form-container button {
   display: block;
   width: 300px;
   height: 40px;
   margin: 10px auto;
-  font-size: 14pt;
 }
-#form-container #add-hide-show-btn, #form-container #edit-hide-show-btn {
+
+#form-container #add-hide-show-btn,
+#form-container #edit-hide-show-btn {
   background-color: white;
-  border-left: 1px solid gainsboro;
-  border-right: 1px solid gainsboro;
+  border-left: 1px solid var(--light-border);
+  border-right: 1px solid var(--light-border);
   position: absolute;
   margin: -50px 0 0 300px;
   padding: 0;
   height: 40px;
   width: 40px;
 }
-#form-container button:hover {
-  border-bottom: 2px solid var(--main-bg-color);
-  color: black;
-  background-color: white;
-}
-/* END FORM */
 
 #filters {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-#filters button:hover {
-  background-color: white;
-  color: black;
-  border-bottom: 1px solid var(--main-bg-color);
 }

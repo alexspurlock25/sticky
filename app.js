@@ -3,6 +3,7 @@ const sqlite3 = require("sqlite3");
 const path = require("path");
 const fs = require("fs");
 
+
 // function to create the main window of the app
 function createMainWindow() {
   let db_path = path.join(app.getPath("userData"), "db", "user_database.sql");
@@ -15,7 +16,7 @@ function createMainWindow() {
   // new object of BrowserWindow, with options
   const mainWindow = new BrowserWindow({
     width: 1200,
-    minWidth: 840,
+    minWidth: 980,
     height: 1200,
     webPreferences: {
       nodeIntegration: true,
