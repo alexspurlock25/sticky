@@ -29,7 +29,7 @@
     "electron-settings": "^4.0.2",
     "express": "^4.17.2",
     "jquery": "^3.6.0",
-    "sqlite3": "^5.0.2",
+    "sqlite3": "^5.0.3",
     "tar": "^6.1.11"
   },
   "build": {
