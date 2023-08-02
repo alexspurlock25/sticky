@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/alexspurlock25/sticky#readme",
   "devDependencies": {
-    "electron": "^18.3.7",
+    "electron": "^25.4.0",
     "electron-builder": "^24.6.3"
   },
   "dependencies": {
